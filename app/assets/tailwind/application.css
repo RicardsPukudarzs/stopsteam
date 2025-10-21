@@ -1,0 +1,13 @@
+@import "tailwindcss";
+@import './box.css';
+@import './buttons.css';
+@import './layout.css';
+
+:root {
+  --app-background: #1a1a1a;
+  --primary-background: #2b2b2b;
+  --primary-foreground: #3d3d3d;
+  --primary-text: #ececec;
+  --secondary-background: #0a0a01;
+  --header-text: #1e1e1e;
+}

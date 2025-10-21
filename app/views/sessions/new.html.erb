@@ -1,0 +1,65 @@
+<div class="background">
+  <div class="register-box">
+    <div class="flex mb-6">
+      <button id="loginTab" type="button" class="flex-1 py-2 text-center font-bold border-b-2 border-blue-500 cursor-pointer">Log in</button>
+      <button id="registerTab" type="button" class="flex-1 py-2 text-center font-bold border-b-2 cursor-pointer">Register</button>
+    </div>
+    <div id="loginForm">
+      <%= form_with model: @user, url: login_path, local: true do |form| %>
+        <div>
+          <%= form.label :email %>
+          <%= form.email_field :email, class: "input-box" %>
+        </div>
+        <div>
+          <%= form.label :password %>
+          <%= form.password_field :password, class: "input-box" %>
+        </div>
+        <div>
+          <%= form.submit "Log in", class: "btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+    <div id="registerForm" class="hidden">
+      <%= form_with model: @user, url: register_path, local: true do |form| %>
+        <div>
+          <%= form.label :username %>
+          <%= form.text_field :username, class: "input-box" %>
+        </div>
+        <div>
+          <%= form.label :email %>
+          <%= form.email_field :email, class: "input-box" %>
+        </div>
+        <div>
+          <%= form.label :password %>
+          <%= form.password_field :password, class: "input-box" %>
+        </div>
+        <div>
+          <%= form.label :password_confirmation, "Confirm Password" %>
+          <%= form.password_field :password_confirmation, class: "input-box" %>
+        </div>
+        <div>
+          <%= form.submit "Register", class: "btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <script>
+    const loginTab = document.getElementById('loginTab');
+    const registerTab = document.getElementById('registerTab');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+
+    loginTab.onclick = function() {
+      loginTab.classList.add('border-blue-500');
+      registerTab.classList.remove('border-blue-500');
+      loginForm.classList.remove('hidden');
+      registerForm.classList.add('hidden');
+    };
+    registerTab.onclick = function() {
+      registerTab.classList.add('border-blue-500');
+      loginTab.classList.remove('border-blue-500');
+      registerForm.classList.remove('hidden');
+      loginForm.classList.add('hidden');
+    };
+  </script>
+</div>

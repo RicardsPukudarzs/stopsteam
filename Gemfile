@@ -19,6 +19,8 @@ gem 'jbuilder'
 # Use PostgreSQL as the database for Active Record
 gem 'pg'
 
+gem 'tailwindcss-rails'
+
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem 'bcrypt', '~> 3.1.7'
 
