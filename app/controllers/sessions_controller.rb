@@ -7,11 +7,12 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.new
-    user = User.find_by(username: params[:username])
-    if user&.authenticate(params[:password])
+    user = User.find_by(email: params[:user][:email])
+    if user&.authenticate(params[:user][:password])
       session[:user_id] = user.id
-      Rails.logger.debug { "@current_user: #{@current_user.inspect}" }
+      redirect_to dashboard_path, notice: 'Logged in successfully.'
     else
+      flash.now[:alert] = 'Invalid email or password.'
       render :new
     end
   end

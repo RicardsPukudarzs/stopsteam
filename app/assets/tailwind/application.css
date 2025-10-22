@@ -2,6 +2,7 @@
 @import './box.css';
 @import './buttons.css';
 @import './layout.css';
+@import './navbar.css';
 
 :root {
   --app-background: #1a1a1a;
