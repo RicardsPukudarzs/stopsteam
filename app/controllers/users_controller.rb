@@ -1,11 +1,9 @@
 class UsersController < ApplicationController
-  def new
-    @user = User.new
-  end
+  def new; end
 
   def create
-    @user = User.new(user_params)
-    if @user.save
+    user = User.new(user_params)
+    if user.save
       redirect_to login_path, notice: 'Registered successfully.'
     else
       flash.now[:alert] = 'Registration failed. Please check the errors below.'
@@ -16,6 +14,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    params.expect(user: %i[username email password password_confirmation])
   end
 end

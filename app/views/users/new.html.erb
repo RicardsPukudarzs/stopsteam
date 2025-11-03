@@ -4,7 +4,7 @@
       <%= link_to 'Log in', login_path, class: 'flex-1 py-2 text-center font-bold border-b-2 cursor-pointer' %>
       <%= link_to 'Register', register_path, class: 'flex-1 py-2 text-center font-bold border-b-2 border-blue-500 cursor-pointer' %>
     </div>
-    <%= form_with model: @user, url: register_path, local: true do |form| %>
+    <%= form_with model: User.new, url: register_path, local: true do |form| %>
       <div>
         <%= form.label :username %>
         <%= form.text_field :username, class: "input-box" %>
