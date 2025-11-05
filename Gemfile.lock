@@ -88,6 +88,7 @@ GEM
     brakeman (7.1.0)
       racc
     builder (3.3.0)
+    cancancan (3.6.1)
     capybara (3.40.0)
       addressable
       matrix
@@ -358,6 +359,16 @@ GEM
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
     stringio (3.1.7)
+    tailwindcss-rails (4.3.0)
+      railties (>= 7.0.0)
+      tailwindcss-ruby (~> 4.0)
+    tailwindcss-ruby (4.1.13)
+    tailwindcss-ruby (4.1.13-aarch64-linux-gnu)
+    tailwindcss-ruby (4.1.13-aarch64-linux-musl)
+    tailwindcss-ruby (4.1.13-arm64-darwin)
+    tailwindcss-ruby (4.1.13-x86_64-darwin)
+    tailwindcss-ruby (4.1.13-x86_64-linux-gnu)
+    tailwindcss-ruby (4.1.13-x86_64-linux-musl)
     thor (1.4.0)
     thruster (0.1.15)
     thruster (0.1.15-aarch64-linux)
@@ -406,6 +417,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootsnap
   brakeman
+  cancancan
   capybara
   debug
   importmap-rails
@@ -427,6 +439,7 @@ DEPENDENCIES
   solid_queue
   sqlite3 (>= 2.1)
   stimulus-rails
+  tailwindcss-rails
   thruster
   turbo-rails
   tzinfo-data
