@@ -17,4 +17,44 @@
     border: 1px solid #ccc;
     border-radius: 0.25rem;
   }
+
+  .stat-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    width: 100%;
+    margin: 2rem auto 0 auto;
+    gap: 2rem;
+    min-height: 100vh;
+  }
+
+  .spotify-stats,
+  .steam-stats {
+    background-color: var(--primary-background);
+    color: var(--primary-text);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 0;
+    width: 80%;
+    min-height: 650px;
+    max-height: 80vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  @media (min-width: 1280px) {
+    .stat-content {
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .spotify-stats,
+    .steam-stats {
+      width: 40%;
+      max-height: 80vh;
+    }
+  }
 }
