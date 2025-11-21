@@ -17,10 +17,34 @@ html, body {
 }
 
 @layer components {
-    .background {
+  .background {
       display: flex;
       min-height: 100vh;
       align-items: center;
       justify-content: center;
+  }
+
+  .artists-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .artist-card {
+    text-align: center;
+  }
+
+  .artist-image {
+    width: 100%;
+    aspect-ratio: 1/1; /* makes all images square */
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .artist-name {
+    margin-top: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
   }
 }
