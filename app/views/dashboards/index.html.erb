@@ -1,22 +1,43 @@
 <%= render 'shared/navbar' %>
 <div class="stat-content">
     <div class="spotify-stats">
-        <div class="spotify-login">
-            <% if session[:spotify_auth].blank? %>
-                <%= link_to 'Sign in with Spotify', '/auth/spotify', method: :post, class: 'btn btn-primary' %>
-            <% elsif session[:spotify_auth].present? %>
-                <div class="artists-grid">
-                    <% @top_artists_all_time.each do |artist| %>
-                    <div class="artist-card">
-                        <img src="<%= artist[:image] %>" alt="<%= artist[:name] %>" class="artist-image">
-                        <p class="artist-name"><%= artist[:name] %></p>
-                    </div>
-                    <% end %>
-                </div>
-            <% end %>
+        <% if session[:spotify_auth].blank? %>
+            <%= link_to 'Sign in with Spotify', '/auth/spotify', method: :post, class: 'btn btn-primary' %>
+        <% else %>
+        <div class="spotify-time-range-buttons">
+            <button data-target="all_time" class="time-range-button border-blue-500">All Time</button>
+            <button data-target="6_months" class="time-range-button">Last 6 Months</button>
+            <button data-target="4_weeks" class="time-range-button">Last 4 Weeks</button>
         </div>
+
+        <div id="top-artists">
+            <div id="all_time" class="tab-content">
+                <%= render 'top_artists', artists: @top_artists_all_time %>
+            </div>
+
+            <div id="6_months" class="tab-content" style="display:none;">
+                <%= render 'top_artists', artists: @top_artists_last_6_months %>
+            </div>
+
+            <div id="4_weeks" class="tab-content" style="display:none;">
+                <%= render 'top_artists', artists: @top_artists_last_4_weeks %>
+            </div>
+        </div>
+        <% end %>
     </div>
     <div class="steam-stats">
-        aa aa aa
+        <h2>Steam Stats Coming Soon!</h2>
     </div>
 </div>
+<script type="text/javascript">
+  document.querySelectorAll('.time-range-button').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.time-range-button').forEach(b => b.classList.remove('border-blue-500'));
+      this.classList.add('border-blue-500');
+
+      const target = this.dataset.target;
+      document.querySelectorAll('.tab-content').forEach(div => div.style.display = 'none');
+      document.getElementById(target).style.display = 'block';
+    });
+  });
+</script>

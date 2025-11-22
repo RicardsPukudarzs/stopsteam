@@ -17,4 +17,22 @@
             background-color: #141414;
         }
     }
+
+    .spotify-time-range-buttons {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .time-range-button {
+        cursor: pointer;
+        border-bottom: 2px solid;
+        width: 33.33%;
+        text-align: center;
+        transition: border-color 0.15s ease;
+    }
+
+    .time-range-button:hover {
+        border-color: #3B82F6;
+    }
 }
