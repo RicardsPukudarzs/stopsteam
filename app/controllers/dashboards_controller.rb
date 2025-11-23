@@ -1,4 +1,6 @@
 class DashboardsController < ApplicationController
+  before_action :require_logged_in
+
   def index
     return unless session[:spotify_auth]
 

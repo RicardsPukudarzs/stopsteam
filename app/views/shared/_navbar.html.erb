@@ -1,7 +1,16 @@
 <nav class="navbar">
   <a href="/dashboard">Home</a>
+
   <div>
     <input type="text" placeholder="Search...">
   </div>
-  <a href="/profile">Profile</a>
+
+  <div class="profile-menu">
+    <span>Profile</span>
+
+    <div class="profile-dropdown">
+      <a href="/profile">View Profile</a>
+      <a href="/logout" data-method="delete">Logout</a>
+    </div>
+  </div>
 </nav>

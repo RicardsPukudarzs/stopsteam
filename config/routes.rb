@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   post '/register', to: 'users#create'
   get 'up' => 'rails/health#show', as: :rails_health_check
 
-  delete '/logout', to: 'sessions#destroy'
+  get '/logout', to: 'sessions#destroy'
   get '/dashboard', to: 'dashboards#index'
 
   get '/auth/spotify/callback', to: 'spotify#spotify'
