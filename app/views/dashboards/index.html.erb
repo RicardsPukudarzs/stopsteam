@@ -2,7 +2,24 @@
 <div class="stat-content">
     <div class="spotify-stats">
         <% if session[:spotify_auth].blank? %>
-            <%= link_to 'Sign in with Spotify', '/auth/spotify', method: :post, class: 'btn btn-primary' %>
+            <div class="spotify-connect">
+                <button class="spotify-button">
+                    Sign in with Spotify
+                </button>
+            </div>
+            <div class="spotify-warning-overlay">
+                <div class="spotify-data-warning">
+                    <p>
+                    If you click "OK" you are agreeing that SpotSteam will access your spotify data and save it in our database for other users to see.
+                    You will be able to delete your spotify data from our database at any time from account settings.
+                    </p>
+
+                    <div class="spotify-warning-buttons">
+                    <button class="spotify-warning-button-cancel">Cancel</button>
+                    <button class="spotify-warning-button">OK</button>
+                    </div>
+                </div>
+            </div>
         <% else %>
         <div class="spotify-time-range-buttons">
             <button data-target="all_time" class="time-range-button border-blue-500">All Time</button>
@@ -30,14 +47,34 @@
     </div>
 </div>
 <script type="text/javascript">
-  document.querySelectorAll('.time-range-button').forEach(btn => {
-    btn.addEventListener('click', function() {
-      document.querySelectorAll('.time-range-button').forEach(b => b.classList.remove('border-blue-500'));
-      this.classList.add('border-blue-500');
+    document.querySelectorAll('.time-range-button').forEach(btn => {
+        btn.addEventListener('click', function() {
+        document.querySelectorAll('.time-range-button').forEach(b => b.classList.remove('border-blue-500'));
+        this.classList.add('border-blue-500');
 
-      const target = this.dataset.target;
-      document.querySelectorAll('.tab-content').forEach(div => div.style.display = 'none');
-      document.getElementById(target).style.display = 'block';
+        const target = this.dataset.target;
+        document.querySelectorAll('.tab-content').forEach(div => div.style.display = 'none');
+        document.getElementById(target).style.display = 'block';
+        });
     });
-  });
+
+    document.addEventListener("turbo:load", () => {
+        const overlay = document.querySelector(".spotify-warning-overlay");
+        const openBtn = document.querySelector(".spotify-button");
+        const cancelBtn = document.querySelector(".spotify-warning-button-cancel");
+        const okBtn = document.querySelector(".spotify-warning-button");
+
+        openBtn.addEventListener("click", () => {
+            overlay.style.display = "flex";
+        });
+
+        cancelBtn.addEventListener("click", () => {
+            overlay.style.display = "none";
+        });
+
+        okBtn.addEventListener("click", () => {
+            window.location.href = "/auth/spotify";
+        });
+    });
+    
 </script>
