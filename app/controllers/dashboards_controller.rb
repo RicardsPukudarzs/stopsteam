@@ -30,4 +30,13 @@ class DashboardsController < ApplicationController
       { name: track.name, album: track.album.name, image: track.album.images.first&.[]('url') }
     end
   end
+
+  def test
+    return unless session[:spotify_auth]
+
+    spotify_user = RSpotify::User.new(session[:spotify_auth])
+
+    @user_image = spotify_user.images.first&.[]('url')
+    render json: { image_url: @user_image }
+  end
 end
