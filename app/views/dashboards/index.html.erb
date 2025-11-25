@@ -21,8 +21,15 @@
                 </div>
             </div>
         <% else %>
+            <div class="top-section-buttons">
+                <button id="top-artist-button" class="stats-switch-button">Top Artists</button>
+                <button id="top-song-button" class="stats-switch-button">Top Songs</button>
+            </div>
             <div class="top-songs-section">
                 <%= render 'top_song_section' %>
+            </div>
+            <div class="top-artists-section" style="display:none;">
+                <%= render 'top_artist_section' %>
             </div>
         <% end %>
     </div>
@@ -48,6 +55,24 @@
         okBtn.addEventListener("click", () => {
             window.location.href = "/auth/spotify";
         });
+    });
+
+    document.addEventListener("turbo:load", () => {
+        const artistSection = document.querySelector(".top-artists-section");
+        const songSection = document.querySelector(".top-songs-section");
+        const artistButton = document.getElementById("top-artist-button");
+        const songButton = document.getElementById("top-song-button");
+
+        artistButton.addEventListener("click", () => {
+            artistSection.style.display = "block";
+            songSection.style.display = "none";
+        });
+
+        songButton.addEventListener("click", () => {
+            songSection.style.display = "block";
+            artistSection.style.display = "none";
+        });
+
     });
     
 </script>

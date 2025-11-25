@@ -1,19 +1,19 @@
 <div class="spotify-time-range-buttons">
-    <button data-target="all_time" class="time-range-button border-blue-500">All Time</button>
-    <button data-target="6_months" class="time-range-button">Last 6 Months</button>
-    <button data-target="4_weeks" class="time-range-button">Last 4 Weeks</button>
+    <button data-target="song_all_time" class="time-range-button border-blue-500">All Time</button>
+    <button data-target="song_6_months" class="time-range-button">Last 6 Months</button>
+    <button data-target="song_4_weeks" class="time-range-button">Last 4 Weeks</button>
 </div>
 
 <div id="top-songs">
-    <div id="all_time" class="tab-content">
+    <div id="song_all_time" class="tab-content">
         <%= render 'top_songs', songs: @top_songs_all_time %>
     </div>
 
-    <div id="6_months" class="tab-content" style="display:none;">
+    <div id="song_6_months" class="tab-content" style="display:none;">
         <%= render 'top_songs', songs: @top_songs_last_6_months %>
     </div>
 
-    <div id="4_weeks" class="tab-content" style="display:none;">
+    <div id="song_4_weeks" class="tab-content" style="display:none;">
         <%= render 'top_songs', songs: @top_songs_last_4_weeks %>
     </div>
 </div>
@@ -26,7 +26,7 @@
 
         const target = this.dataset.target;
         document.querySelectorAll('.tab-content').forEach(div => div.style.display = 'none');
-        document.getElementById(target).style.display = 'block';
+        document.getElementById(`${target}`).style.display = 'block';
         });
     });
 </script>
