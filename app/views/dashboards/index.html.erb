@@ -1,7 +1,7 @@
 <%= render 'shared/navbar' %>
 <div class="stat-content">
     <div class="spotify-stats">
-        <% if session[:spotify_auth].blank? %>
+        <% if current_user.spotify_user.blank? %>
             <div class="spotify-connect">
                 <button class="spotify-button">
                     Sign in with Spotify
