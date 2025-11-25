@@ -1,8 +1,9 @@
-<div class="artists-grid">
+<div class="song-grid">
   <% songs.each_with_index do |song, index| %>
-    <div class="artist-card">
-      <img src="<%= song[:image] %>" alt="<%= song[:name] %>" class="artist-image">
-      <p class="artist-name"><%= "#{index + 1}. #{song[:name]}" %></p>
+    <div class="song-card">
+      <p class="song-name"><%= "#{index + 1}. #{song[:name]}" %></p>
+      <p class="song-artist"><%= song[:artist] %></p>
+      <img src="<%= song[:image] %>" alt="<%= song[:name] %>" class="song-image">
     </div>
   <% end %>
 </div>

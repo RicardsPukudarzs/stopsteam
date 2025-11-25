@@ -37,7 +37,7 @@ html, body {
 
   .artist-image {
     width: 100%;
-    aspect-ratio: 1/1; /* makes all images square */
+    aspect-ratio: 1/1;
     object-fit: cover;
     border-radius: 10px;
   }
@@ -46,5 +46,43 @@ html, body {
     margin-top: 10px;
     font-size: 1.1rem;
     font-weight: 600;
+  }
+
+  .song-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .song-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .song-name,
+  .song-artist {
+    margin: 0;
+  }
+
+  .song-name {
+    width: 200px; /* adjust as needed */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+  }
+
+  .song-artist {
+    color: #666;
+  }
+
+  /* Tiny image */
+  .song-image {
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
+    border-radius: 4px;
   }
 }

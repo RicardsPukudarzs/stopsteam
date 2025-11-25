@@ -1,0 +1,32 @@
+<div class="spotify-time-range-buttons">
+    <button data-target="all_time" class="time-range-button border-blue-500">All Time</button>
+    <button data-target="6_months" class="time-range-button">Last 6 Months</button>
+    <button data-target="4_weeks" class="time-range-button">Last 4 Weeks</button>
+</div>
+
+<div id="top-songs">
+    <div id="all_time" class="tab-content">
+        <%= render 'top_songs', songs: @top_songs_all_time %>
+    </div>
+
+    <div id="6_months" class="tab-content" style="display:none;">
+        <%= render 'top_songs', songs: @top_songs_last_6_months %>
+    </div>
+
+    <div id="4_weeks" class="tab-content" style="display:none;">
+        <%= render 'top_songs', songs: @top_songs_last_4_weeks %>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.time-range-button').forEach(btn => {
+        btn.addEventListener('click', function() {
+        document.querySelectorAll('.time-range-button').forEach(b => b.classList.remove('border-blue-500'));
+        this.classList.add('border-blue-500');
+
+        const target = this.dataset.target;
+        document.querySelectorAll('.tab-content').forEach(div => div.style.display = 'none');
+        document.getElementById(target).style.display = 'block';
+        });
+    });
+</script>

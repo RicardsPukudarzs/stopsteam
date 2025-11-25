@@ -21,25 +21,9 @@
                 </div>
             </div>
         <% else %>
-        <div class="spotify-time-range-buttons">
-            <button data-target="all_time" class="time-range-button border-blue-500">All Time</button>
-            <button data-target="6_months" class="time-range-button">Last 6 Months</button>
-            <button data-target="4_weeks" class="time-range-button">Last 4 Weeks</button>
-        </div>
-
-        <div id="top-artists">
-            <div id="all_time" class="tab-content">
-                <%= render 'top_artists', artists: @top_artists_all_time %>
+            <div class="top-songs-section">
+                <%= render 'top_song_section' %>
             </div>
-
-            <div id="6_months" class="tab-content" style="display:none;">
-                <%= render 'top_artists', artists: @top_artists_last_6_months %>
-            </div>
-
-            <div id="4_weeks" class="tab-content" style="display:none;">
-                <%= render 'top_artists', artists: @top_artists_last_4_weeks %>
-            </div>
-        </div>
         <% end %>
     </div>
     <div class="steam-stats">
@@ -47,17 +31,6 @@
     </div>
 </div>
 <script type="text/javascript">
-    document.querySelectorAll('.time-range-button').forEach(btn => {
-        btn.addEventListener('click', function() {
-        document.querySelectorAll('.time-range-button').forEach(b => b.classList.remove('border-blue-500'));
-        this.classList.add('border-blue-500');
-
-        const target = this.dataset.target;
-        document.querySelectorAll('.tab-content').forEach(div => div.style.display = 'none');
-        document.getElementById(target).style.display = 'block';
-        });
-    });
-
     document.addEventListener("turbo:load", () => {
         const overlay = document.querySelector(".spotify-warning-overlay");
         const openBtn = document.querySelector(".spotify-button");

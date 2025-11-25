@@ -58,6 +58,7 @@ class SpotifyController < ApplicationController
         spotify_user_record.top_songs.create!(
           name: song.name,
           album_name: song.album.name,
+          artist_name: song.artists.map(&:name).join(', '),
           spotify_id: song.id,
           image_url: song.album.images.first&.[]('url'),
           period: period_name,
