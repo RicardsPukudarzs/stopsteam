@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'dashboards#index'
 
   get '/auth/spotify/callback', to: 'spotify#spotify'
+  match '/auth/steam/callback', to: 'steam#steam', via: %i[get post]
 
   get '/test', to: 'dashboards#test'
 

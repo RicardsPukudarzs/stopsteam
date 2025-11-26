@@ -25,6 +25,8 @@ gem 'cancancan'
 
 gem 'rspotify'
 
+gem 'omniauth-steam'
+
 gem 'dotenv-rails'
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]

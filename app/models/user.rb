@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_secure_password
 
   has_one :spotify_user, dependent: :destroy
+  has_one :steam_user, dependent: :destroy
 end
 
 # == Schema Information

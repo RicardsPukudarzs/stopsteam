@@ -2,7 +2,7 @@
 <div class="stat-content">
     <div class="spotify-stats">
         <% if current_user.spotify_user.blank? %>
-            <div class="spotify-connect">
+            <div class="api-connect">
                 <button class="spotify-button">
                     Sign in with Spotify
                 </button>
@@ -25,16 +25,25 @@
                 <button id="top-artist-button" class="stats-switch-button">Top Artists</button>
                 <button id="top-song-button" class="stats-switch-button">Top Songs</button>
             </div>
+            <div class="top-artists-section">
+                <%= render 'top_artist_section' %>
+            </div>
             <div class="top-songs-section">
                 <%= render 'top_song_section' %>
-            </div>
-            <div class="top-artists-section" style="display:none;">
-                <%= render 'top_artist_section' %>
             </div>
         <% end %>
     </div>
     <div class="steam-stats">
-        <h2>Steam Stats Coming Soon!</h2>
+        <% if current_user.steam_user.blank?%>
+            <div class="api-connect">
+                <%= link_to "Sign in with Steam", "/auth/steam" %>
+            </div>q
+        <% else %>
+            <div class="top-section-buttons">
+                <button id="top-artist-button" class="stats-switch-button">User info</button>
+                <button id="top-song-button" class="stats-switch-button">Games info</button>
+            </div>
+        <% end %>
     </div>
 </div>
 <script type="text/javascript">
@@ -74,5 +83,4 @@
         });
 
     });
-    
 </script>
