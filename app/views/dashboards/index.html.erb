@@ -34,14 +34,20 @@
         <% end %>
     </div>
     <div class="steam-stats">
-        <% if current_user.steam_user.blank?%>
+        <% if current_user.steam_user.blank? %>
             <div class="api-connect">
                 <%= link_to "Sign in with Steam", "/auth/steam" %>
-            </div>q
+            </div>
         <% else %>
             <div class="top-section-buttons">
                 <button id="top-artist-button" class="stats-switch-button">User info</button>
                 <button id="top-song-button" class="stats-switch-button">Games info</button>
+            </div>
+            <div class="user-info-section">
+                <%= render 'user_info_section' %>
+            </div>
+            <div class="games-info-section">
+                <%= render 'games_info_section' %>
             </div>
         <% end %>
     </div>

@@ -13,5 +13,6 @@ end
 # profile_image_url :string
 # profile_url       :string
 # user_id           :bigint           not null, unique, foreign key
+# user_level        :integer
 # created_at        :datetime         not null
 # updated_at        :datetime         not null

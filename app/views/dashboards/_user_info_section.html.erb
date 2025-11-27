@@ -1,0 +1,18 @@
+<div class="steam-user-info">
+    <div class="steam-user-info-header">
+        <img src="<%= current_user.steam_user.profile_image_url %>" alt="Steam Avatar" class="steam-avatar">
+        <h2 class="steam-user-header-data">Name: <%= current_user.steam_user.name %></h2>
+        <h2 class="steam-user-header-data">Level: <%= current_user.steam_user.user_level %></h2>
+        <h2 class="steam-user-header-data">Last Log Off: <%= Time.at(current_user.steam_user.last_log_off).strftime("%B %d, %Y") %></h2>
+        <h2 class="steam-user-header-data">Country: <%= current_user.steam_user.loc_country_code %></h2>
+        <h2 class="steam-user-header-data">Time created: <%= Time.at(current_user.steam_user.time_created).strftime("%B %d, %Y") %></h2>
+    </div>
+
+    <hr class="steam-divider">
+
+    <div class="steam-user-stats">
+        <h2 class="steam-user-stats-data">Total games: <%= current_user.steam_user.user_game.count %></h2>
+        <h2 class="steam-user-stats-data">Total achievements:</h2>
+        <h2 class="steam-user-stats-data">Total hours: <%= current_user.steam_user.user_game.total_playtime_hours %></h2>
+    </div>
+</div>

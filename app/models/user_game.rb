@@ -1,5 +1,9 @@
 class UserGame < ApplicationRecord
   belongs_to :steam_user
+
+  def self.total_playtime_hours
+    (sum(:playtime_forever).to_f / 60).floor
+  end
 end
 
 # == Schema Information
