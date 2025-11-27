@@ -1,12 +1,25 @@
 <div class="steam-user-info">
     <div class="steam-user-info-header">
         <img src="<%= current_user.steam_user.profile_image_url %>" alt="Steam Avatar" class="steam-avatar">
-        <h2 class="steam-user-header-data">Name: <%= current_user.steam_user.name %></h2>
-        <h2 class="steam-user-header-data">Level: <%= current_user.steam_user.user_level %></h2>
-        <h2 class="steam-user-header-data">Last Log Off: <%= Time.at(current_user.steam_user.last_log_off).strftime("%B %d, %Y") %></h2>
-        <h2 class="steam-user-header-data">Country: <%= current_user.steam_user.loc_country_code %></h2>
-        <h2 class="steam-user-header-data">Time created: <%= Time.at(current_user.steam_user.time_created).strftime("%B %d, %Y") %></h2>
-    </div>
+
+        <div class="steam-info-columns">
+            <div class="steam-info-labels">
+                <p>Name:</p>
+                <p>Level:</p>
+                <p>Last Log Off:</p>
+                <p>Country:</p>
+                <p>Date Created:</p>
+            </div>
+
+            <div class="steam-info-values">
+                <p><%= current_user.steam_user.name %></p>
+                <p><%= current_user.steam_user.user_level %></p>
+                <p><%= Time.at(current_user.steam_user.last_log_off).strftime("%B %d, %Y") %></p>
+                <p><%= current_user.steam_user.loc_country_code %></p>
+                <p><%= Time.at(current_user.steam_user.time_created).strftime("%B %d, %Y") %></p>
+            </div>
+        </div>
+        </div>
 
     <hr class="steam-divider">
 

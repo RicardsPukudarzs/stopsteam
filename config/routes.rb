@@ -18,7 +18,6 @@ Rails.application.routes.draw do
   match '/auth/steam/callback', to: 'steam#steam', via: %i[get post]
 
   get '/test', to: 'dashboards#test'
-  get '/steam_test', to: 'steam#steam_test'
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest

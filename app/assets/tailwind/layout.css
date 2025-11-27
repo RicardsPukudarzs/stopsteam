@@ -85,4 +85,33 @@ html, body {
     object-fit: cover;
     border-radius: 4px;
   }
+
+  .steam-user-info-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 15px 0;
+    gap: 20px;
+  }
+
+  .steam-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .steam-info-columns {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+  }
+
+  .steam-info-values p {
+    text-align: right;
+  }
+
+  .steam-info-labels p {
+    font-weight: bold;
+  }
 }

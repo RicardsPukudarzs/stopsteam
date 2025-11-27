@@ -7,31 +7,18 @@ class SteamApi
   end
 
   def player_summary(steam_id)
-    endpoint = '/ISteamUser/GetPlayerSummaries/v0002/'
-    response = @connection.get(endpoint, {
-                                 key: @api_key,
-                                 steamids: steam_id
-                               })
-
-    JSON.parse(response.body)
+    get('/ISteamUser/GetPlayerSummaries/v0002/', steamids: steam_id)
   end
 
   def owned_games(steam_id)
-    endpoint = '/IPlayerService/GetOwnedGames/v0001/'
-    response = @connection.get(endpoint, {
-                                 key: @api_key,
-                                 steamid: steam_id,
-                                 include_appinfo: true,
-                                 include_played_free_games: true
-                               })
-
-    JSON.parse(response.body)
+    get('/IPlayerService/GetOwnedGames/v0001/',
+        steamid: steam_id,
+        include_appinfo: true,
+        include_played_free_games: true)
   end
 
   def game_info(app_id)
-    url = 'https://store.steampowered.com/api/appdetails'
-    response = Faraday.get(url, { appids: app_id })
-
+    response = Faraday.get('https://store.steampowered.com/api/appdetails', { appids: app_id })
     return nil unless response.success?
 
     JSON.parse(response.body)
@@ -41,23 +28,22 @@ class SteamApi
   end
 
   def user_level(steam_id)
-    endpoint = '/IPlayerService/GetSteamLevel/v1/'
-    response = @connection.get(endpoint, {
-                                 key: @api_key,
-                                 steamid: steam_id
-                               })
-
-    JSON.parse(response.body)
+    get('/IPlayerService/GetSteamLevel/v1/', steamid: steam_id)
   end
 
-  def user_game_info(steam_id, app_id)
-    endpoint = '/IPlayerService/GetUserGameInfo/v1/'
-    response = @connection.get(endpoint, {
-                                 key: @api_key,
-                                 steamid: steam_id,
-                                 appid: app_id
-                               })
+  def user_achievements(steam_id, app_id)
+    get('/ISteamUserStats/GetPlayerAchievements/v0001/',
+        steamid: steam_id,
+        appid: app_id)
+  end
 
+  private
+
+  def get(endpoint, params = {})
+    response = @connection.get(endpoint, params.merge(key: @api_key))
     JSON.parse(response.body)
+  rescue StandardError => e
+    Rails.logger.error("SteamApi#get error for #{endpoint}: #{e.message}")
+    nil
   end
 end
