@@ -24,8 +24,8 @@
     <hr class="steam-divider">
 
     <div class="steam-user-stats">
-        <h2 class="steam-user-stats-data">Total games: <%= current_user.steam_user.user_game.count %></h2>
+        <h2 class="steam-user-stats-data">Total games: <%= current_user.steam_user.user_games.count %></h2>
         <h2 class="steam-user-stats-data">Total achievements:</h2>
-        <h2 class="steam-user-stats-data">Total hours: <%= current_user.steam_user.user_game.total_playtime_hours %></h2>
+        <h2 class="steam-user-stats-data">Total hours: <%= current_user.steam_user.user_games.total_playtime_hours %></h2>
     </div>
 </div>

@@ -28,7 +28,7 @@ class SteamService
     games = @steam_api.owned_games(steam_id)['response']['games'] || []
 
     games.each do |game|
-      steam_game = steam_user.user_game.find_or_initialize_by(app_id: game['appid'])
+      steam_game = steam_user.user_games.find_or_initialize_by(app_id: game['appid'])
       steam_game.update(
         name: game['name'],
         playtime_forever: game['playtime_forever'],
