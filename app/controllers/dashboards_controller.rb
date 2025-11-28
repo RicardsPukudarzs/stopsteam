@@ -27,6 +27,8 @@ class DashboardsController < ApplicationController
     @top_songs_last_4_weeks = current_user.spotify_user.top_songs.where(period: '4_weeks').order(:rank).limit(50).map do |track|
       { name: track.name, album: track.album_name, image: track.image_url, artist: track.artist_name }
     end
+
+    @steam_user_games = current_user.steam_user.user_games.order(playtime_forever: :desc)
   end
 
   def test

@@ -28,7 +28,7 @@
             <div class="top-artists-section">
                 <%= render 'top_artist_section' %>
             </div>
-            <div class="top-songs-section">
+            <div class="top-songs-section" style="display: none;">
                 <%= render 'top_song_section' %>
             </div>
         <% end %>
@@ -40,14 +40,14 @@
             </div>
         <% else %>
             <div class="top-section-buttons">
-                <button id="top-artist-button" class="stats-switch-button">User info</button>
-                <button id="top-song-button" class="stats-switch-button">Games info</button>
+                <button id="user-info-button" class="stats-switch-button">User info</button>
+                <button id="games-info-button" class="stats-switch-button">Games info</button>
             </div>
             <div class="user-info-section">
                 <%= render 'user_info_section' %>
             </div>
-            <div class="games-info-section">
-                <%= render 'games_info_section' %>
+            <div class="games-info-section" style="display: none;">
+                <%= render 'games_info_section', games: @steam_user_games %>
             </div>
         <% end %>
     </div>
@@ -78,15 +78,41 @@
         const artistButton = document.getElementById("top-artist-button");
         const songButton = document.getElementById("top-song-button");
 
+        // Function to select the "All Time" tab by default
+        const selectDefaultTab = (section, defaultTarget) => {
+            const defaultButton = section.querySelector(`.time-range-button[data-target="${defaultTarget}"]`);
+            if (defaultButton) {
+                defaultButton.click();
+            }
+        };
+
         artistButton.addEventListener("click", () => {
             artistSection.style.display = "block";
             songSection.style.display = "none";
+            selectDefaultTab(artistSection, "artist_all_time");
         });
 
         songButton.addEventListener("click", () => {
             songSection.style.display = "block";
             artistSection.style.display = "none";
+            selectDefaultTab(songSection, "song_all_time");
+        });
+    });
+
+    document.addEventListener("turbo:load", () => {
+        const userInfoSection = document.querySelector(".user-info-section");
+        const gamesInfoSection = document.querySelector(".games-info-section");
+        const userInfoButton = document.getElementById("user-info-button");
+        const gamesInfoButton = document.getElementById("games-info-button");
+
+        userInfoButton.addEventListener("click", () => {
+            userInfoSection.style.display = "block";
+            gamesInfoSection.style.display = "none";
         });
 
+        gamesInfoButton.addEventListener("click", () => {
+            gamesInfoSection.style.display = "block";
+            userInfoSection.style.display = "none";
+        });
     });
 </script>

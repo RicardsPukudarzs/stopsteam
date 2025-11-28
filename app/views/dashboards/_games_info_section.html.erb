@@ -1,0 +1,26 @@
+
+<div class="steam-games-info">
+  <div class="steam-games-info-header">
+    <h2>Games Information</h2>
+  </div>
+
+  <hr class="steam-divider">
+
+  <div class="steam-games-stats">
+    <% games.each_with_index do |game, index| %>
+      <div class="game-info">
+        <div class="game-index-icon">
+          <h3 class="game-index"><%= index + 1 %>.</h3>
+          <img src="<%= game.image_url %>" alt="Game Icon" class="game-icon">
+        </div>
+
+        <h3 class="game-name"><%= game.name %></h3>
+
+        <div class="game-details">
+          <p>Playtime: <%= game.playtime_hours %> hours</p>
+          <p>Last Played: <%= game.last_played_date.present? ? game.last_played_date.strftime("%B %d, %Y") : "Never" %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

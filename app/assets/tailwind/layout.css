@@ -101,17 +101,62 @@ html, body {
     object-fit: cover;
   }
 
-  .steam-info-columns {
+  .steam-info-columns,
+  .steam-stats-columns {
     display: flex;
     justify-content: space-between;
     flex: 1;
   }
 
-  .steam-info-values p {
+  .steam-info-values p,
+  .steam-stats-values p {
     text-align: right;
   }
 
-  .steam-info-labels p {
+  .steam-info-labels p,
+  .steam-stats-labels p {
     font-weight: bold;
   }
+
+  .steam-stats-columns {
+    margin-top: 10px;
+  }
+
+  .steam-stats-labels p,
+  .steam-stats-values p {
+    margin-bottom: 5px;
+  }
+
+  .game-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5px;
+  }
+
+  .game-index-icon {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space between index and icon */
+  }
+
+  .game-icon {
+    height: 30px;
+    width: 30px;
+    object-fit: cover;
+    border-radius: 2px;
+  }
+
+  .game-name {
+    flex: 1; /* Take up remaining space */
+    margin-left: 15px; /* Add spacing between the name and the index/icon */
+    font-weight: bold;
+  }
+
+  .game-details {
+    text-align: right;
+    font-size: 0.9rem;
+    color: #666;
+  }
+
 }
