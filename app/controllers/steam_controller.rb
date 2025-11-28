@@ -6,7 +6,7 @@ class SteamController < ApplicationController
     steam_id = auth.uid
 
     service = SteamService.new
-    service.sync_user(steam_id, current_user)
+    service.sync_data(current_user, steam_id)
 
     redirect_to dashboard_path
   end

@@ -3,6 +3,12 @@ class SteamService
     @steam_api = steam_api
   end
 
+  def sync_data(user, steam_id)
+    steam_user = sync_user(steam_id, user)
+    sync_user_games(steam_id, steam_user)
+    steam_user
+  end
+
   def sync_user(steam_id, user)
     player_info = @steam_api.player_summary(steam_id)['response']['players'].first
     user_level = @steam_api.user_level(steam_id)['response']['player_level']
@@ -20,7 +26,6 @@ class SteamService
       user_id: user.id
     )
 
-    sync_user_games(steam_id, steam_user)
     steam_user
   end
 
