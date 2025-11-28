@@ -1,0 +1,4 @@
+<%= render 'shared/navbar' %>
+<% @top_tracks.each do |track, weight| %>
+    <p><%= track %>: <%= weight %></p>
+<% end %>
