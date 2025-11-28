@@ -16,7 +16,7 @@ class UserGame < ApplicationRecord
   end
 
   def playtime_hours
-    (playtime_forever.to_f / 60).floor
+    (playtime_forever.to_f / 60).floor(2)
   end
 end
 
