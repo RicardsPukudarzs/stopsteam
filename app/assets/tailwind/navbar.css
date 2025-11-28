@@ -47,4 +47,72 @@
     .profile-dropdown a:hover {
         background-color: #e5e5e5;
     }
+
+    .search-bar {
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        width: 200px;
+        border: none;
+        border-bottom: 2px solid transparent;
+        transition: border-bottom 0.3s ease;
+    }
+
+    .search-bar:hover {
+        border-bottom: 2px solid var(--primary-text);
+    }
+
+    .search-bar:focus {
+        outline: none;
+        border-bottom: 2px solid var(--primary-text);
+        animation: breathing 1.5s infinite;
+    }
+
+    @keyframes breathing {
+        0% {
+            border-bottom-color: white;
+        }
+        50% {
+            border-bottom-color: #222222;
+        }
+        100% {
+            border-bottom-color: white;
+        }
+    }
+
+    .search-dropdown {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 300px;
+        max-height: 400px;
+        overflow-y: auto;
+        background-color: var(--primary-background);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        border-radius: 0.5rem;
+        z-index: 1000;
+    }
+
+    .search-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        text-decoration: none; /* Remove underline from links */
+        color: var(--primary-text); /* Ensure text color matches the design */
+    }
+
+    .search-item:hover {
+        background-color: #313131;
+    }
+
+    .search-item:visited {
+        color: var(--primary-text); /* Ensure visited links don't change color */
+    }
+
+    .search-item:active {
+        background-color: #414141; /* Optional: Add a slightly darker color when clicked */
+    }
 }

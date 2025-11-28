@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   before_action :require_logged_out, only: %i[new create]
 
+  def show
+  end
+
   def new; end
 
   def create

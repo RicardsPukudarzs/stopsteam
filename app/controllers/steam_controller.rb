@@ -11,6 +11,9 @@ class SteamController < ApplicationController
     redirect_to dashboard_path
   end
 
+  def show
+  end
+
   def steam_test
     steam_api = SteamApi.new
     test = steam_api.game_info(730)

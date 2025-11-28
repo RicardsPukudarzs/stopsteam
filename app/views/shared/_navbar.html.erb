@@ -1,8 +1,10 @@
 <nav class="navbar">
   <a href="/dashboard">Home</a>
 
-  <div>
-    <input type="text" placeholder="Search...">
+  <div class="nav-search">
+    <input type="text" placeholder="Search users or games..." class="search-bar" id="navbar-search" autocomplete="off">
+    <div class="search-dropdown" id="search-dropdown">
+    </div>
   </div>
 
   <div class="profile-menu">
@@ -14,3 +16,52 @@
     </div>
   </div>
 </nav>
+
+<script>
+  document.addEventListener("turbo:load", () => {
+    const searchInput = document.getElementById("navbar-search");
+    const dropdown = document.getElementById("search-dropdown");
+
+    document.addEventListener("click", (e) => {
+      if (!searchInput.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.style.display = "none";
+      }
+    });
+
+    searchInput.addEventListener("input", async (e) => {
+      const query = e.target.value.trim();
+
+      if (query.length === 0) {
+        dropdown.style.display = "none";
+        dropdown.innerHTML = "";
+        return;
+      }
+
+      const response = await fetch(`/search?q=${encodeURIComponent(query)}`);
+      const data = await response.json();
+
+      dropdown.innerHTML = `
+        ${data.users
+          .map(
+            (user) => `
+          <a href="/user/${user[0]}" class="search-item">
+            User: ${user[1]}
+          </a>
+        `
+          )
+          .join("")}
+        ${data.games
+          .map(
+            (game) => `
+          <a href="/game/${game[0]}" class="search-item">
+            Game: ${game[1]}
+          </a>
+        `
+          )
+          .join("")}
+      `;
+
+      dropdown.style.display = "block";
+    });
+  });
+</script>
