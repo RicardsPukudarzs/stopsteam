@@ -27,13 +27,11 @@
         <div class= "steam-stats-columns">
             <div class="steam-stats-labels">
                 <p>Games Owned:</p>
-                <p>Achievements Unlocked:</p>
                 <p>Total Playtime Hours:</p>
             </div>
 
             <div class="steam-stats-values">
                 <p><%= current_user.steam_user.user_games.count %></p>
-                <p>3</p>
                 <p><%= current_user.steam_user.user_games.total_playtime_hours %></p>
             </div>
         </div>
