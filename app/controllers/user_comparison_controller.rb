@@ -57,18 +57,21 @@ class UserComparisonController < ApplicationController
     artists1 = user1.spotify_user.top_artists.where(period: 'all_time').order(:rank)
     artists2 = user2.spotify_user.top_artists.where(period: 'all_time').order(:rank)
 
-    ranks1 = artists1.to_h { |a| [a.name, a.rank] }
-    ranks2 = artists2.to_h { |a| [a.name, a.rank] }
+    artists1_hash = artists1.index_by(&:name)
+    artists2_hash = artists2.index_by(&:name)
 
-    common_names = ranks1.keys & ranks2.keys
+    common_names = artists1_hash.keys & artists2_hash.keys
 
     common_artists = common_names.map do |name|
-      rank1 = ranks1[name]
-      rank2 = ranks2[name]
+      a1 = artists1_hash[name]
+      a2 = artists2_hash[name]
+      rank1 = a1.rank
+      rank2 = a2.rank
       score = rank1 + rank2 + (rank1 - rank2).abs
 
       {
         name: name,
+        image_url: a1.image_url || a2.image_url,
         user1_rank: rank1,
         user2_rank: rank2,
         score: score
@@ -86,18 +89,22 @@ class UserComparisonController < ApplicationController
     tracks1 = user1.spotify_user.top_songs.where(period: 'all_time').order(:rank)
     tracks2 = user2.spotify_user.top_songs.where(period: 'all_time').order(:rank)
 
-    ranks1 = tracks1.to_h { |t| [t.name, t.rank] }
-    ranks2 = tracks2.to_h { |t| [t.name, t.rank] }
+    tracks1_hash = tracks1.index_by(&:name)
+    tracks2_hash = tracks2.index_by(&:name)
 
-    common_names = ranks1.keys & ranks2.keys
+    common_names = tracks1_hash.keys & tracks2_hash.keys
 
     common_tracks = common_names.map do |name|
-      rank1 = ranks1[name]
-      rank2 = ranks2[name]
+      t1 = tracks1_hash[name]
+      t2 = tracks2_hash[name]
+      rank1 = t1.rank
+      rank2 = t2.rank
       score = rank1 + rank2 + (rank1 - rank2).abs
 
       {
         name: name,
+        image_url: t1.image_url || t2.image_url,
+        artist_name: t1.artist_name || t2.artist_name,
         user1_rank: rank1,
         user2_rank: rank2,
         score: score

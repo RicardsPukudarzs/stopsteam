@@ -1,6 +1,6 @@
 <div class="music-comparison-section">    
     <div class="top-music-showcase">
-        <h2>Top Artists Comparison</h2>
+        <h2 class="mb-2">Top Artists Comparison</h2>
         <div class="top-user-artists-section">
             <div class="user1-top-artists">
                 <h3 class="user-top-artists-header"><%= @user1.username %>'s Top Artists</h3>
@@ -57,9 +57,28 @@
         </div>
     </div>
     <div class="common-music-showcase">
-        <h1>Compatibility Score: <%= @music_compatibility_score * 100 %>%</h1>
+        <h1 class="mb-2">Compatibility Score: <%= @music_compatibility_score * 100 %>%</h1>
         <div class="common-artists-section">
-            <h2>Common Top Artists</h2>
+            <h2 class="comparison-section-header">In Common Top Artists</h2>
+            <div class="common-artists-list">
+                <% @common_artists.first(6).each do |artist| %>
+                    <div class="common-artist-item">
+                        <img src="<%= artist[:image_url] %>" alt="<%= artist[:name] %>" class="common-artist-image"/>
+                        <span class="common-artist-name"><%= artist[:name] %></span>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+        <div class="common-tracks-section mt-4">
+            <h2 class="comparison-section-header">In Common Top Tracks</h2>
+            <div class="common-tracks-list">
+                <% @common_tracks.each do |track| %>
+                    <div class="common-track-item">
+                        <img src="<%= track[:image_url] %>" alt="<%= track[:name] %>" class="comparison-track-image"/>
+                        <span class="common-track-name"><%= track[:name] %> by <%= track[:artist_name] %></span>
+                    </div>
+                <% end %>
+            </div>
         </div>
     </div>
 </div>
