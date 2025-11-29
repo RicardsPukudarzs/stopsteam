@@ -14,10 +14,33 @@
             </div>
         </div>
 
-        <hr>
+        <hr class="mb-2">
         
         <div class="profile-content">
-
+            <%= form_with model: current_user, url: profile_path, method: :patch, local: true do |form| %>
+                <div>
+                    <%= form.label :username %>
+                    <%= form.text_field :username, class: "input-box" %>
+                </div>
+                <div>
+                    <%= form.label :email %>
+                    <%= form.email_field :email, class: "input-box" %>
+                </div>
+                <div>
+                    <%= form.label :password %>
+                    <%= form.password_field :password, class: "input-box", autocomplete: "new-password" %>
+                </div>
+                <div>
+                    <%= form.label :password_confirmation %>
+                    <%= form.password_field :password_confirmation, class: "input-box", autocomplete: "new-password" %>
+                </div>
+                <div>
+                    <%= form.submit "Edit Profile", class: "btn-primary" %>
+                </div>
+            <% end %>
+            <% if flash[:alert] %>
+                <div class="alert"><%= flash[:alert] %></div>
+            <% end %>
         </div>
     </div>
 </div>

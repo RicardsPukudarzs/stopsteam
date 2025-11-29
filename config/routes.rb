@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
   get '/profile', to: 'profiles#show', as: :profile
 
-  resource :profile, only: [:show] do
+  resource :profile, only: %i[show update] do
     delete :disconnect_steam
     delete :disconnect_spotify
     delete :destroy_account
