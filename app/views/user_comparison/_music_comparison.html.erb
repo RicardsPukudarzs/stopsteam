@@ -1,3 +1,65 @@
-<div>
-    music test
+<div class="music-comparison-section">    
+    <div class="top-music-showcase">
+        <h2>Top Artists Comparison</h2>
+        <div class="top-user-artists-section">
+            <div class="user1-top-artists">
+                <h3 class="user-top-artists-header"><%= @user1.username %>'s Top Artists</h3>
+                <div class="artists-list">
+                    <% @top_artists_user1.each_with_index do |artist, idx| %>
+                        <div class="artist-list-item">
+                            <span class="artist-list-index"><%= idx + 1 %></span>
+                            <img src="<%= artist.image_url %>" alt="<%= artist.name %>" class="comparison-artist-image"/>
+                            <span class="artist-list-name"><%= artist.name %></span>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+            <div class="user2-top-artists">
+                <h3 class="user-top-artists-header"><%= @user2.username %>'s Top Artists</h3>
+                <div class="artists-list">
+                    <% @top_artists_user2.each_with_index do |artist, idx| %>
+                        <div class="artist-list-item">
+                            <span class="artist-list-index"><%= idx + 1 %></span>
+                            <img src="<%= artist.image_url %>" alt="<%= artist.name %>" class="comparison-artist-image"/>
+                            <span class="artist-list-name"><%= artist.name %></span>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        <div class="top-user-tracks-section mt-6">
+            <div class="user1-top-tracks">
+                <h3 class="user-top-artists-header"><%= @user1.username %>'s Top Tracks</h3>
+                <div class="tracks-list">
+                    <% @top_tracks_user1.each_with_index do |track, idx| %>
+                        <div class="track-list-item">
+                            <span class="track-list-index"><%= idx + 1 %></span>
+                            <img src="<%= track.image_url %>" alt="<%= track.artist_name %>" class="comparison-track-image"/>
+                            <span class="track-list-name"><%= track.name %></span>
+                            <span class="track-list-artist"><%= track.artist_name %></span>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+            <div class="user2-top-tracks">
+                <h3 class="user-top-artists-header"><%= @user2.username %>'s Top Tracks</h3>
+                <div class="tracks-list">
+                    <% @top_tracks_user2.each_with_index do |track, idx| %>
+                        <div class="track-list-item">
+                            <span class="track-list-index"><%= idx + 1 %></span>
+                            <img src="<%= track.image_url %>" alt="<%= track.artist_name %>" class="comparison-track-image"/>
+                            <span class="track-list-name"><%= track.name %></span>
+                            <span class="track-list-artist"><%= track.artist_name %></span>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="common-music-showcase">
+        <h1>Compatibility Score: <%= @music_compatibility_score * 100 %>%</h1>
+        <div class="common-artists-section">
+            <h2>Common Top Artists</h2>
+        </div>
+    </div>
 </div>

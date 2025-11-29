@@ -1,22 +1,22 @@
 <%= render 'shared/navbar' %>
 <div class="user-comparison-buttons">
-    <button id="compare-games-btn" class="stats-switch-button">Games</button>
     <button id="compare-music-btn" class="stats-switch-button">Music</button>
+    <button id="compare-games-btn" class="stats-switch-button">Games</button>
 </div>
 
 <div class="user-comparison-container">
     <div class="user-comparison-box">
-        <div class="game-comparison-section">
-            <%= render 'game_comparison' %>
-        </div>
-        <div class="music-comparison-section hidden">
+        <div class="music-comparison-section">
             <%= render 'music_comparison' %>
+        </div>
+        <div class="game-comparison-section hidden">
+            <%= render 'game_comparison' %>
         </div>
     </div>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('turbo:load', function() {
     const musicSection = document.querySelector('.music-comparison-section');
     const gameSection = document.querySelector('.game-comparison-section');
     const musicBtn = document.getElementById('compare-music-btn');
