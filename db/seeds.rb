@@ -8,6 +8,9 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+#   destroys existing users to avoid duplication
+User.where(username: %w[alice bob carol dave]).destroy_all
+
 # Create users
 users = [
   { username: 'alice', email: 'alice@example.com', password: 'password' },
@@ -18,10 +21,14 @@ users = [
 
 # Create Steam and Spotify connections
 steam_users = [
-  { steam_id: '76561198000000001', name: 'AliceSteam', profile_image_url: '', profile_url: '', user: users[0], user_level: 10 },
-  { steam_id: '76561198000000002', name: 'BobSteam', profile_image_url: '', profile_url: '', user: users[1], user_level: 15 },
-  { steam_id: '76561198000000003', name: 'CarolSteam', profile_image_url: '', profile_url: '', user: users[2], user_level: 20 },
-  { steam_id: '76561198000000004', name: 'DaveSteam', profile_image_url: '', profile_url: '', user: users[3], user_level: 25 }
+  { steam_id: '76561198000000001', name: 'AliceSteam', profile_image_url: '', profile_url: '', user: users[0], user_level: 10, last_log_off: 1.day.ago,
+    time_created: 5.days.ago },
+  { steam_id: '76561198000000002', name: 'BobSteam', profile_image_url: '', profile_url: '', user: users[1], user_level: 15, last_log_off: 1.day.ago,
+    time_created: 5.days.ago },
+  { steam_id: '76561198000000003', name: 'CarolSteam', profile_image_url: '', profile_url: '', user: users[2], user_level: 20, last_log_off: 1.day.ago,
+    time_created: 5.days.ago },
+  { steam_id: '76561198000000004', name: 'DaveSteam', profile_image_url: '', profile_url: '', user: users[3], user_level: 25, last_log_off: 1.day.ago,
+    time_created: 5.days.ago }
 ].map { |attrs| SteamUser.create!(attrs) }
 
 spotify_users = [
