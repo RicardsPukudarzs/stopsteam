@@ -264,4 +264,26 @@
     color: black;
   }
 
+  .user-comparison-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .user-comparison-box {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background-color: var(--primary-background);
+    color: var(--primary-text);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    width: 80%;
+    height: 80vh;
+    overflow-y: auto;
+    margin-bottom: 2rem;
+  }
+
 }

@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
   get '/search', to: 'search#index'
 
-  get '/user/:id', to: 'users#show', as: :user
+  get '/user/:id', to: 'user_comparison#show', as: :user
   get '/game/:app_id', to: 'games#show', as: :game
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)

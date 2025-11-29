@@ -140,6 +140,14 @@ html, body {
     gap: 5px; /* Space between index and icon */
   }
 
+  .user-comparison-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+
   .game-icon {
     height: 30px;
     width: 30px;
