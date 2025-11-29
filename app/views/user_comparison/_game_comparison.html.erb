@@ -1,3 +1,55 @@
-<div>
-    game test
+<div class="game-comparison-section">
+    <div class="top-game-showcase">
+        <h2 class="comparison-section-header mb-2">Top Games Comparison</h2>
+        <div class="top-user-games-section">
+            <div class="user1-top-games">
+                <h3 class="user-top-artists-header"><%= @user1.username %>'s Top Games</h3>
+                <div class="games-list">
+                    <% @top_games_user1.each_with_index do |game, idx| %>
+                        <div class="game-list-item">
+                            <span class="game-list-index"><%= idx + 1 %></span>
+                            <% if game.img_icon_url.present? %>
+                                <img src="<%= game.image_url %>" alt="<%= game.name %>" class="comparison-game-image"/>
+                            <% end %>
+                            <span class="game-list-name"><%= game.name %></span>
+                            <span class="game-list-playtime"><%= game.playtime_hours %> hrs</span>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+            <div class="user2-top-games">
+                <h3 class="user-top-artists-header"><%= @user2.username %>'s Top Games</h3>
+                <div class="games-list">
+                    <% @top_games_user2.each_with_index do |game, idx| %>
+                        <div class="game-list-item">
+                            <span class="game-list-index"><%= idx + 1 %></span>
+                            <% if game.img_icon_url.present? %>
+                                <img src="<%= game.image_url %>" alt="<%= game.name %>" class="comparison-game-image"/>
+                            <% end %>
+                            <span class="game-list-name"><%= game.name %></span>
+                            <span class="game-list-playtime"><%= game.playtime_hours %> hrs</span>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="common-game-showcase mt-6">
+        <h2 class="comparison-section-header">In Common Top Games</h2>
+        <div class="common-games-list">
+            <% @common_games.first(6).each do |game| %>
+                <div class="common-game-item">
+                    <%# You may need to fetch header_image_url for common games if not present in the hash %>
+                    <% if game[:header_image_url].present? %>
+                        <img src="<%= game[:header_image_url] %>" alt="<%= game[:name] %>" class="common-game-image"/>
+                    <% end %>
+                    <span class="common-game-name"><%= game[:name] %></span>
+                    <span class="common-game-playtime">
+                        <%= @user1.username %>: <%= game[:user1_playtime] %> hrs<br>
+                        <%= @user2.username %>: <%= game[:user2_playtime] %> hrs
+                    </span>
+                </div>
+            <% end %>
+        </div>
+    </div>
 </div>
