@@ -1,4 +1,6 @@
 class SearchController < ApplicationController
+  before_action :require_logged_in
+
   def index
     query = params[:q].to_s.strip.downcase
 

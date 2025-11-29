@@ -1,4 +1,5 @@
 class UserComparisonController < ApplicationController
+  before_action :require_logged_in
   def show
     @user1 = current_user
     @user2 = User.find(params[:id])

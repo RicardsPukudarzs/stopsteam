@@ -1,4 +1,5 @@
 class GamesController < ApplicationController
+  before_action :require_logged_in
   def show
     app_id = params[:app_id]
     @top_artists = top_artists(app_id)
