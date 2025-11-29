@@ -72,7 +72,7 @@
         <div class="common-tracks-section mt-4">
             <h2 class="comparison-section-header">In Common Top Tracks</h2>
             <div class="common-tracks-list">
-                <% @common_tracks.each do |track| %>
+                <% @common_tracks.first(10).each do |track| %>
                     <div class="common-track-item">
                         <img src="<%= track[:image_url] %>" alt="<%= track[:name] %>" class="comparison-track-image"/>
                         <span class="common-track-name"><%= track[:name] %> by <%= track[:artist_name] %></span>
