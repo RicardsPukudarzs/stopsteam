@@ -28,6 +28,8 @@ class DashboardsController < ApplicationController
       { name: track.name, album: track.album_name, image: track.image_url, artist: track.artist_name }
     end
 
+    return unless current_user.steam_user
+
     @steam_user_games = current_user.steam_user.user_games.order(playtime_forever: :desc)
   end
 

@@ -127,7 +127,7 @@ html, body {
     margin-bottom: 5px;
   }
 
-  .game-info {
+  .user-game-info {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -158,5 +158,4 @@ html, body {
     font-size: 0.9rem;
     color: #666;
   }
-
 }

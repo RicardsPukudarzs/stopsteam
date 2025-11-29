@@ -1,4 +1,66 @@
 <%= render 'shared/navbar' %>
-<% @top_tracks.each do |track, weight| %>
-    <p><%= track %>: <%= weight %></p>
-<% end %>
+<div class="game-music-container">
+    <div class="game-music-stat-box">
+        <div class="game-section">
+            <img src="<%= @header_img %>" alt="<%= @name %> Header Image" class="game-header-image">
+            <div class="game-info-grid">
+                <div class="game-info-row">
+                    <div class="game-info-label">Name:</div>
+                    <div class="game-info-value game-title"><%= @name %></div>
+                </div>
+                <div class="game-info-row">
+                    <div class="game-info-label">Release Date:</div>
+                    <div class="game-info-value"><%= @release_date %></div>
+                </div>
+                <div class="game-info-row">
+                    <div class="game-info-label">Developer(s):</div>
+                    <div class="game-info-value"><%= @developers.join(', ') %></div>
+                </div>
+                <div class="game-info-row">
+                    <div class="game-info-label">Publisher(s):</div>
+                    <div class="game-info-value"><%= @publishers.join(', ') %></div>
+                </div>
+                <div class="game-info-row">
+                    <div class="game-info-label">Categories:</div>
+                    <div class="game-info-value"><%= @categories.join(', ') %></div>
+                </div>
+                <div class="game-info-row">
+                    <div class="game-info-label">Description:</div>
+                    <div class="game-info-value game-description"><%= @short_desc.html_safe %></div>
+                </div>
+                <div class="game-info-row">
+                    <div class="game-info-label">Price:</div>
+                    <div class="game-info-value game-price"><%= @price %></div>
+                </div>
+                </div>
+            </div>
+        <div class="music-section">
+            <div class="music-artists">
+                <h1 class="music-section-header">Music Artists</h1>
+                <div class="artists-grid">
+                    <% @top_artists.each_with_index do |artist, index| %>
+                        <div class="artist-card">
+                            <img src="<%= artist[:image_url] %>" alt="<%= artist[:name] %>" class="artist-image" />
+                            <div class="artist-name"><%= index + 1 %>.<%= artist[:name] %></div>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+            <div class="music-tracks">
+                <h1 class="music-section-header">Music Tracks</h1>
+                <div class="track-list">
+                    <% @top_tracks.each_with_index do |track, index| %>
+                        <div class="track-item">
+                            <div class="track-index"><%= index + 1 %>.</div>
+                            <div class="track-info">
+                                <img src="<%= track[:image_url] %>" alt="<%= track[:name] %> Album Art" class="track-album-art" />
+                                <div class="track-name"><%= track[:name] %></div>
+                                <div class="track-artist">by <%= track[:artist_name] %></div>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -17,8 +17,11 @@ class SteamApi
         include_played_free_games: true)
   end
 
-  def game_info(app_id)
-    response = Faraday.get('https://store.steampowered.com/api/appdetails', { appids: app_id })
+  def game_info(app_id, language = 'en')
+    response = Faraday.get(
+      'https://store.steampowered.com/api/appdetails',
+      { appids: app_id, language: language }
+    )
     return nil unless response.success?
 
     JSON.parse(response.body)
