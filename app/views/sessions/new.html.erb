@@ -5,14 +5,14 @@
       <%= link_to 'Register', register_path, class: 'flex-1 py-2 text-center font-bold border-b-2 cursor-pointer' %>
     </div>
     <div id="loginForm">
-      <%= form_with model: User.new, url: login_path, local: true do |form| %>
+      <%= form_with model: User.new, url: login_path, local: true, html: { autocomplete: "off" } do |form| %>
         <div>
           <%= form.label :email %>
-          <%= form.email_field :email, class: "input-box" %>
+          <%= form.email_field :email, class: "input-box", autocomplete: "off" %>
         </div>
         <div>
           <%= form.label :password %>
-          <%= form.password_field :password, class: "input-box" %>
+          <%= form.password_field :password, class: "input-box", autocomplete: "off" %>
         </div>
         <div>
           <%= form.submit "Log in", class: "btn-primary" %>
@@ -20,7 +20,12 @@
       <% end %>
     </div> 
     <% flash.each do |key, value| %>
-      <div class="<%= key %>"><%= value %></div>
+      <% flash_class = case key
+         when "notice" then "flash-notice"
+         when "alert", "error" then "flash-alert"
+         else "flash-notice"
+         end %>
+      <div class="<%= flash_class %>"><%= value %></div>
     <% end %>
   </div>
 </div>
