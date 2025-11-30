@@ -2,12 +2,8 @@ class UserComparisonController < ApplicationController
   before_action :require_logged_in
 
   def show
-    return redirect_to dashboard_path if current_user.steam_user.nil? || current_user.spotify_user.nil?
-
     user = User.find_by(id: params[:id])
-    return redirect_to dashboard_path unless user
-    return redirect_to dashboard_path if user.steam_user.nil? || user.spotify_user.nil?
-    return redirect_to dashboard_path if current_user.id == params[:id].to_i
+    return redirect_to dashboard_path unless valid_comparison?(user)
 
     service = UserComparisonService.new
 
@@ -24,5 +20,16 @@ class UserComparisonController < ApplicationController
     @common_tracks = service.get_common_tracks(@user1, @user2)
     @music_compatibility_score = service.calculate_music_compatibility_score(@user1, @user2)
     @game_compatibility_score = service.calculate_game_compatibility_score(@user1, @user2)
+  end
+
+  private
+
+  def valid_comparison?(user)
+    return false if current_user.steam_user.nil? || current_user.spotify_user.nil?
+    return false if user.nil?
+    return false if user.steam_user.nil? || user.spotify_user.nil?
+    return false if current_user.id == user.id
+
+    true
   end
 end

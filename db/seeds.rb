@@ -9,7 +9,7 @@
 #   end
 
 #   destroys existing users to avoid duplication
-User.where(username: %w[alice bob carol dave]).destroy_all
+User.where(username: %w[alice bob carol dave eve]).destroy_all
 
 # Create users
 users = [
@@ -119,4 +119,64 @@ spotify_users.each_with_index do |spotify_user, _i|
       spotify_user: spotify_user
     )
   end
+end
+
+# Create a new user
+reverse_user = User.create!(username: 'eve', email: 'eve@example.com', password: 'password')
+
+# Steam connection
+reverse_steam = SteamUser.create!(
+  steam_id: '76561198000000005',
+  name: 'EveSteam',
+  profile_image_url: '',
+  profile_url: '',
+  user: reverse_user,
+  user_level: 30,
+  last_log_off: 1.day.ago,
+  time_created: 5.days.ago
+)
+
+# Spotify connection
+reverse_spotify = SpotifyUser.create!(
+  display_name: 'EveSpotify',
+  profile_image_url: '',
+  user: reverse_user
+)
+
+# Reverse games
+games_data.reverse.each_with_index do |game, j|
+  UserGame.create!(
+    app_id: game[:app_id],
+    name: game[:name],
+    playtime_forever: game[:playtime_forever] + ((games_data.length - j) * 100), # different playtime
+    img_icon_url: game[:img_icon_url],
+    rtime_last_played: game[:rtime_last_played] - (j * 3600),
+    steam_user: reverse_steam
+  )
+end
+
+# Reverse artists
+artists_data.reverse.each_with_index do |artist, j|
+  TopArtist.create!(
+    name: artist[:name],
+    spotify_id: artist[:spotify_id],
+    image_url: artist[:image_url],
+    period: artist[:period],
+    rank: j + 1,
+    spotify_user: reverse_spotify
+  )
+end
+
+# Reverse tracks
+tracks_data.reverse.each_with_index do |track, j|
+  TopSong.create!(
+    name: track[:name],
+    album_name: track[:album_name],
+    spotify_id: track[:spotify_id],
+    image_url: track[:image_url],
+    period: track[:period],
+    rank: j + 1,
+    artist_name: track[:artist_name],
+    spotify_user: reverse_spotify
+  )
 end
