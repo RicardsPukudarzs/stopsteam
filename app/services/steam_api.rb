@@ -40,6 +40,14 @@ class SteamApi
         appid: app_id)
   end
 
+  def fetch_game_details(app_id)
+    steam_api = SteamApi.new
+    game_data = steam_api.game_info(app_id)
+    return unless game_data.present? && game_data.values.first['success']
+
+    game_data.values.first['data']
+  end
+
   private
 
   def get(endpoint, params = {})
