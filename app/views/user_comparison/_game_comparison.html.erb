@@ -36,13 +36,10 @@
     </div>
     <div class="common-game-showcase mt-6">
         <h2 class="comparison-section-header">In Common Top Games</h2>
+        <h2 class="comparison-section-header">Compatibility Score: <%= @game_compatibility_score * 100 %>%</h2>
         <div class="common-games-list">
             <% @common_games.first(6).each do |game| %>
                 <div class="common-game-item">
-                    <%# You may need to fetch header_image_url for common games if not present in the hash %>
-                    <% if game[:header_image_url].present? %>
-                        <img src="<%= game[:header_image_url] %>" alt="<%= game[:name] %>" class="common-game-image"/>
-                    <% end %>
                     <span class="common-game-name"><%= game[:name] %></span>
                     <span class="common-game-playtime">
                         <%= @user1.username %>: <%= game[:user1_playtime] %> hrs<br>
