@@ -17,8 +17,6 @@ Rails.application.routes.draw do
   get '/auth/spotify/callback', to: 'spotify#spotify'
   match '/auth/steam/callback', to: 'steam#steam', via: %i[get post]
 
-  get '/steam_test', to: 'steam#steam_test'
-
   get '/search', to: 'search#index'
 
   get '/user/:id', to: 'user_comparison#show', as: :user
