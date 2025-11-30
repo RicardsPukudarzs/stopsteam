@@ -28,3 +28,9 @@ Metrics/AbcSize:
 
 Layout/LineLength:
     Max: 160
+
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+Metrics/ClassLength:
+  Max: 160

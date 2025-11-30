@@ -1,8 +1,7 @@
 class ProfilesController < ApplicationController
   before_action :require_logged_in
 
-  def show
-  end
+  def show; end
 
   def update
     if current_user.update(profile_params)
@@ -32,6 +31,6 @@ class ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    params.expect(user: %i[username email password password_confirmation])
   end
 end
