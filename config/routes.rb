@@ -19,12 +19,12 @@ Rails.application.routes.draw do
 
   get '/search', to: 'search#index'
 
-  get '/user/:id', to: 'user_comparison#show', as: :user
+  get '/user/:id', to: 'user_comparison#show', as: :user_comparison
+  get '/profile', to: 'users#show', as: :profile
+
   get '/game/:app_id', to: 'games#show', as: :game
 
-  get '/profile', to: 'profiles#show', as: :profile
-
-  resource :profile, only: %i[show update] do
+  resource :user, only: %i[show update] do
     delete :disconnect_steam
     delete :disconnect_spotify
     delete :destroy_account
