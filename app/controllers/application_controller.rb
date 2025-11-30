@@ -21,4 +21,12 @@ class ApplicationController < ActionController::Base
   def require_logged_in
     redirect_to login_path unless logged_in?
   end
+
+  def route_not_found
+    if logged_in?
+      redirect_to dashboard_path
+    else
+      redirect_to login_path
+    end
+  end
 end

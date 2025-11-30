@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   root to: redirect('/login')
+
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
 
@@ -29,6 +30,8 @@ Rails.application.routes.draw do
     delete :disconnect_spotify
     delete :destroy_account
   end
+
+  match '*unmatched', to: 'application#route_not_found', via: :all
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
