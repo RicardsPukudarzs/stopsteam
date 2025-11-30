@@ -32,15 +32,4 @@ class DashboardsController < ApplicationController
 
     @steam_user_games = current_user.steam_user.user_games.order(playtime_forever: :desc)
   end
-
-  def test
-    return unless session[:spotify_auth]
-
-    spotify_user = RSpotify::User.new(session[:spotify_auth])
-
-    @user_top_songs = spotify_user.top_tracks(limit: 10, time_range: 'short_term').map do |track|
-      { name: track.name, id: track.id, album: track.album.name, image: track.album.images.first&.[]('url') }
-    end
-    render json: current_user.spotify_user.top_artists.where(period: '4_weeks')
-  end
 end
