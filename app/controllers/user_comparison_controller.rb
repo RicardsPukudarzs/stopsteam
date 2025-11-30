@@ -1,6 +1,8 @@
 class UserComparisonController < ApplicationController
   before_action :require_logged_in
   def show
+    return redirect_to dashboard_path if current_user.steam_user.nil? || current_user.spotify_user.nil?
+
     @user1 = current_user
     @user2 = User.find(params[:id])
     @top_games_user1 = get_top_games(@user1, 10)
