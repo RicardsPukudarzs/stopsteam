@@ -28,40 +28,48 @@
       }
     });
 
+    let debounceTimeout;
     searchInput.addEventListener("input", async (e) => {
-      const query = e.target.value.trim();
+      clearTimeout(debounceTimeout);
+      debounceTimeout = setTimeout(async () => {
+        const query = e.target.value.trim();
 
-      if (query.length === 0) {
-        dropdown.style.display = "none";
-        dropdown.innerHTML = "";
-        return;
-      }
+        if (query.length === 0) {
+          dropdown.style.display = "none";
+          dropdown.innerHTML = "";
+          return;
+        }
 
-      const response = await fetch(`/search?q=${encodeURIComponent(query)}`);
-      const data = await response.json();
+        const response = await fetch(`/search?q=${encodeURIComponent(query)}`);
+        const data = await response.json();
 
-      dropdown.innerHTML = `
-        ${data.users
-          .map(
-            (user) => `
-          <a href="/user/${user[0]}" class="search-item">
-            User: ${user[1]}
-          </a>
-        `
-          )
-          .join("")}
-        ${data.games
-          .map(
-            (game) => `
-          <a href="/game/${game[0]}" class="search-item">
-            Game: ${game[1]}
-          </a>
-        `
-          )
-          .join("")}
-      `;
+        let html = "";
+        if (data.users.length === 0 && data.games.length === 0) {
+          html = `<div class="search-item">No results found</div>`;
+        } else {
+          html += data.users
+            .map(
+              (user) => `
+        <a href="/user/${user[0]}" class="search-item">
+          User: ${user[1]}
+        </a>
+      `
+            )
+            .join("");
+          html += data.games
+            .map(
+              (game) => `
+        <a href="/game/${game[0]}" class="search-item">
+          Game: ${game[1]}
+        </a>
+      `
+            )
+            .join("");
+        }
 
-      dropdown.style.display = "block";
+        dropdown.innerHTML = html;
+        dropdown.style.display = "block";
+      }, 200); // 200ms debounce
     });
   });
 </script>
