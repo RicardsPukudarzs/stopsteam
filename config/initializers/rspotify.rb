@@ -1,4 +1,4 @@
 RSpotify.authenticate(
-  ENV.fetch('CLIENT_ID'),
-  ENV.fetch('CLIENT_SECRET')
+  ENV.fetch('CLIENT_ID', 'dummy'),
+  ENV.fetch('CLIENT_SECRET', 'dummy')
 )
