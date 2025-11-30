@@ -71,7 +71,7 @@ STEAM_API_KEY=your_steam_api_key
 3. Start the Rails server:
 
    ```sh
-   rails server
+   bin/dev
    ```
 
 4. Visit [http://127.0.0.1:3000](http://127.0.0.1:3000) in your browser.
