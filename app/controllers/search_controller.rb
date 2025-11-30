@@ -4,7 +4,6 @@ class SearchController < ApplicationController
   def index
     query = params[:q].to_s.strip.downcase
 
-    # Only show users if current user has both connections
     users = if current_user&.spotify_user && current_user.steam_user
               User
                 .joins(:spotify_user, :steam_user)
