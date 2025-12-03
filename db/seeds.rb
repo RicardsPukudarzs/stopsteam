@@ -40,10 +40,12 @@ spotify_users = [
 
 # Create games for each user
 games_data = [
-  { app_id: 570, name: 'Dota 2', playtime_forever: 1200, img_icon_url: 'dota2icon', rtime_last_played: Time.now.to_i },
   { app_id: 730, name: 'Counter-Strike 2', playtime_forever: 78_000, img_icon_url: '8dbc71957312bbd3baea65848b545be9eae2a355',
     rtime_last_played: Time.now.to_i - 86_400 },
-  { app_id: 440, name: 'Team Fortress 2', playtime_forever: 300, img_icon_url: 'tf2icon', rtime_last_played: Time.now.to_i - 172_800 }
+  { app_id: 1_172_470, name: 'Apex Legends', playtime_forever: 40_000, img_icon_url: 'apexicon', rtime_last_played: Time.now.to_i - 100_000 },
+  { app_id: 105_600, name: 'Terraria', playtime_forever: 5000, img_icon_url: 'terrariaicon', rtime_last_played: Time.now.to_i - 200_000 },
+  { app_id: 2_379_780, name: 'Balatro', playtime_forever: 4000, img_icon_url: 'balatroicon', rtime_last_played: Time.now.to_i - 300_000 },
+  { app_id: 960_090, name: 'Bloons TD 6', playtime_forever: 100_000, img_icon_url: 'bloonsicon', rtime_last_played: Time.now.to_i - 400_000 }
 ]
 
 steam_users.each_with_index do |steam_user, i|

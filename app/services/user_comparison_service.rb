@@ -97,74 +97,80 @@ class UserComparisonService
   end
 
   def calculate_music_compatibility_score(user1, user2)
-    artists1 = get_top_artists(user1, 50)
-    artists2 = get_top_artists(user2, 50)
+    # Get top 10 artists and tracks
+    artists1 = get_top_artists(user1, 10)
+    artists2 = get_top_artists(user2, 10)
     names1 = artists1.map(&:name)
     names2 = artists2.map(&:name)
 
-    tracks1 = get_top_tracks(user1, 50)
-    tracks2 = get_top_tracks(user2, 50)
+    tracks1 = get_top_tracks(user1, 10)
+    tracks2 = get_top_tracks(user2, 10)
     track_names1 = tracks1.map(&:name)
     track_names2 = tracks2.map(&:name)
 
-    if names1 == names2
-      artist_score = 1.0
-    else
-      common_artists = names1 & names2
-      sum = common_artists.sum do |name|
-        r1 = names1.index(name)
-        r2 = names2.index(name)
-        1.0 - ((r1 - r2).abs / 10.0) - ((r1 + r2) / 20.0)
-      end
-      artist_score = sum / 10.0
-      artist_score = artist_score.clamp(0, 1)
-    end
+    common_artists = names1 & names2
+    artist_overlap_score = common_artists.size / 10.0
 
-    if track_names1 == track_names2
-      track_score = 1.0
-    else
-      common_tracks = track_names1 & track_names2
-      sum = common_tracks.sum do |name|
-        r1 = track_names1.index(name)
-        r2 = track_names2.index(name)
-        1.0 - ((r1 - r2).abs / 10.0) - ((r1 + r2) / 20.0)
-      end
-      track_score = sum / 10.0
-      track_score = track_score.clamp(0, 1)
-    end
+    artist_rank_score = if common_artists.any?
+                          sum = common_artists.sum do |name|
+                            r1 = names1.index(name)
+                            r2 = names2.index(name)
+                            1.0 - ((r1 - r2).abs / 10.0)
+                          end
+                          sum / common_artists.size
+                        else
+                          0.0
+                        end
 
-    ((artist_score * 0.5) + (track_score * 0.5)).round(3)
+    common_tracks = track_names1 & track_names2
+    track_overlap_score = common_tracks.size / 10.0
+
+    track_rank_score = if common_tracks.any?
+                         sum = common_tracks.sum do |name|
+                           r1 = track_names1.index(name)
+                           r2 = track_names2.index(name)
+                           1.0 - ((r1 - r2).abs / 10.0)
+                         end
+                         sum / common_tracks.size
+                       else
+                         0.0
+                       end
+
+    artist_score = (artist_overlap_score * 0.8) + (artist_rank_score * 0.2)
+    track_score = (track_overlap_score * 0.8) + (track_rank_score * 0.2)
+
+    total_score = (artist_score * 0.6) + (track_score * 0.4)
+    total_score.round(3)
   end
 
   def calculate_game_compatibility_score(user1, user2)
-    top_games1 = get_top_games(user1, 10)
-    top_games2 = get_top_games(user2, 10)
+    top_games1 = get_top_games(user1, 20)
+    top_games2 = get_top_games(user2, 20)
 
     names1 = top_games1.map(&:name)
     names2 = top_games2.map(&:name)
 
-    return 1.0 if names1 == names2
+    common_names10 = (names1 & names2)
+    playtime_score = if common_names10.any?
+                       sum = common_names10.sum do |name|
+                         r1 = names1.index(name)
+                         r2 = names2.index(name)
+                         g1 = top_games1[r1]
+                         g2 = top_games2[r2]
+                         playtime1 = g1.playtime_hours
+                         playtime2 = g2.playtime_hours
+                         similarity = 1.0 - ((playtime1 - playtime2).abs / [playtime1, playtime2].max.to_f)
+                         similarity.clamp(0, 1)
+                       end
+                       sum / common_names10.size
+                     else
+                       0.0
+                     end
 
-    common_names = names1 & names2
+    common_names20 = names1 & names2
+    common_games_score = common_names20.size / 20.0
 
-    sum = common_names.sum do |name|
-      r1 = names1.index(name)
-      r2 = names2.index(name)
-      g1 = top_games1[r1]
-      g2 = top_games2[r2]
-      playtime1 = g1.playtime_hours
-      playtime2 = g2.playtime_hours
-
-      playtime_similarity = 1.0 - ((playtime1 - playtime2).abs / [playtime1, playtime2].max.to_f)
-      playtime_similarity = playtime_similarity.clamp(0, 1)
-
-      rank_similarity = 1.0 - ((r1 - r2).abs / 10.0) - ((r1 + r2) / 20.0)
-      rank_similarity = rank_similarity.clamp(0, 1)
-
-      (rank_similarity * 0.5) + (playtime_similarity * 0.5)
-    end
-
-    score = sum / 10.0
-    score.clamp(0, 1).round(3)
+    total_score = (playtime_score * 0.5) + (common_games_score * 0.5)
+    total_score.round(3)
   end
 end
