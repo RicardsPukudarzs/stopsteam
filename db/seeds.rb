@@ -42,10 +42,14 @@ spotify_users = [
 games_data = [
   { app_id: 730, name: 'Counter-Strike 2', playtime_forever: 78_000, img_icon_url: '8dbc71957312bbd3baea65848b545be9eae2a355',
     rtime_last_played: Time.now.to_i - 86_400 },
-  { app_id: 1_172_470, name: 'Apex Legends', playtime_forever: 40_000, img_icon_url: 'apexicon', rtime_last_played: Time.now.to_i - 100_000 },
-  { app_id: 105_600, name: 'Terraria', playtime_forever: 5000, img_icon_url: 'terrariaicon', rtime_last_played: Time.now.to_i - 200_000 },
-  { app_id: 2_379_780, name: 'Balatro', playtime_forever: 4000, img_icon_url: 'balatroicon', rtime_last_played: Time.now.to_i - 300_000 },
-  { app_id: 960_090, name: 'Bloons TD 6', playtime_forever: 100_000, img_icon_url: 'bloonsicon', rtime_last_played: Time.now.to_i - 400_000 }
+  { app_id: 1_172_470, name: 'Apex Legends', playtime_forever: 40_000, img_icon_url: '6cc35932af780289ae3d8d5cdbfe9cd545decad2',
+    rtime_last_played: Time.now.to_i - 100_000 },
+  { app_id: 105_600, name: 'Terraria', playtime_forever: 5000, img_icon_url: '858961e95fbf869f136e1770d586e0caefd4cfac',
+    rtime_last_played: Time.now.to_i - 200_000 },
+  { app_id: 2_379_780, name: 'Balatro', playtime_forever: 4000, img_icon_url: 'b6018068070ab0e23561694c11f7950dd6f4c752',
+    rtime_last_played: Time.now.to_i - 300_000 },
+  { app_id: 960_090, name: 'Bloons TD 6', playtime_forever: 100_000, img_icon_url: 'c5f0b67c8beeb6be99abe2ad8db2cada5d5ccff0',
+    rtime_last_played: Time.now.to_i - 400_000 }
 ]
 
 steam_users.each_with_index do |steam_user, i|

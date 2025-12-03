@@ -97,7 +97,6 @@ class UserComparisonService
   end
 
   def calculate_music_compatibility_score(user1, user2)
-    # Get top 10 artists and tracks
     artists1 = get_top_artists(user1, 10)
     artists2 = get_top_artists(user2, 10)
     names1 = artists1.map(&:name)
