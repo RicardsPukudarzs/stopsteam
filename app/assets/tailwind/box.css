@@ -347,7 +347,6 @@
     align-items: center;
   }
 
-  .artist-list-item,
   .track-list-item {
     display: flex;
     align-items: center;
@@ -361,13 +360,54 @@
     gap: 12px;
   }
 
-  .artist-list-index,
-  .track-list-index {
+  .artist-list-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100px;
+    margin: 0 8px;
+  }
+
+  .artist-bubble {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background: var(--primary-background, #fff);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    margin-bottom: 8px;
+  }
+
+  .artist-bubble-image {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .artist-name-index {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .artist-list-index {
     font-weight: bold;
     font-size: 1rem;
-    width: 24px;
-    text-align: right;
-    color: var(--primary-text);
+    color: var(--primary-text, #222);
+    margin-bottom: 2px;
+  }
+
+  .artist-list-name {
+    font-size: 0.95rem;
+    color: var(--primary-text, #222);
+    text-align: center;
+    word-break: break-word;
   }
 
   .comparison-artist-image,

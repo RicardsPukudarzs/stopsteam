@@ -7,9 +7,13 @@
                 <div class="artists-list">
                     <% @top_artists_user1.each_with_index do |artist, idx| %>
                         <div class="artist-list-item">
-                            <span class="artist-list-index"><%= idx + 1 %></span>
-                            <img src="<%= artist.image_url %>" alt="<%= artist.name %>" class="comparison-artist-image"/>
-                            <span class="artist-list-name"><%= artist.name %></span>
+                            <div class="artist-bubble">
+                                <img src="<%= artist.image_url %>" alt="<%= artist.name %>" class="artist-bubble-image"/>
+                            </div>
+                            <div class="artist-name-index">
+                                <span class="artist-list-index"><%= idx + 1 %>.</span>
+                                <span class="artist-list-name"><%= artist.name %></span>
+                            </div>
                         </div>
                     <% end %>
                 </div>
@@ -19,9 +23,13 @@
                 <div class="artists-list">
                     <% @top_artists_user2.each_with_index do |artist, idx| %>
                         <div class="artist-list-item">
-                            <span class="artist-list-index"><%= idx + 1 %></span>
-                            <img src="<%= artist.image_url %>" alt="<%= artist.name %>" class="comparison-artist-image"/>
-                            <span class="artist-list-name"><%= artist.name %></span>
+                            <div class="artist-bubble">
+                                <img src="<%= artist.image_url %>" alt="<%= artist.name %>" class="artist-bubble-image"/>
+                            </div>
+                            <div class="artist-name-index">
+                                <span class="artist-list-index"><%= idx + 1 %>.</span>
+                                <span class="artist-list-name"><%= artist.name %></span>
+                            </div>
                         </div>
                     <% end %>
                 </div>
