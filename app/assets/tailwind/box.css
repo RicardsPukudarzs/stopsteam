@@ -309,7 +309,7 @@
     align-items: center;
   }
 
-  @media (max-width: 1279px) {
+  @media (max-width: 1280px) {
     .music-comparison-section {
       flex-direction: column;
       gap: 2rem;
@@ -350,14 +350,19 @@
   .track-list-item {
     display: flex;
     align-items: center;
+    flex-direction: column;
     background: var(--primary-background);
     border-radius: 8px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
     padding: 6px 12px;
-    min-width: 180px;
-    max-width: 340px;
     width: 100%;
     gap: 12px;
+  }
+
+  @media (min-width: 960px) {
+    .track-list-item {
+      flex-direction: row;
+    }
   }
 
   .artist-list-item {
@@ -546,6 +551,7 @@
     width: 100%;
     gap: 2rem;
   }
+
   .user1-top-games,
   .user2-top-games {
     width: 50%;
@@ -553,6 +559,7 @@
     flex-direction: column;
     align-items: center;
   }
+
   .games-list {
     display: flex;
     flex-direction: column;
@@ -560,6 +567,7 @@
     width: 100%;
     align-items: center;
   }
+
   .game-list-item {
     display: flex;
     align-items: center;
@@ -572,6 +580,7 @@
     width: 100%;
     gap: 12px;
   }
+
   .game-list-index {
     font-weight: bold;
     font-size: 1rem;
@@ -579,6 +588,7 @@
     text-align: right;
     color: var(--primary-text);
   }
+
   .comparison-game-image {
     width: 48px;
     height: 48px;
@@ -586,6 +596,7 @@
     border-radius: 6px;
     margin-right: 8px;
   }
+
   .game-list-name {
     font-size: 1rem;
     font-weight: 500;
@@ -596,6 +607,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
   .game-list-playtime {
     font-size: 0.95rem;
     color: #666;
@@ -603,6 +615,7 @@
     text-align: right;
     margin-left: auto;
   }
+
   .common-games-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -611,6 +624,7 @@
     justify-items: center;
     margin-top: 1rem;
   }
+
   .common-game-item {
     display: flex;
     flex-direction: column;
@@ -621,6 +635,7 @@
     box-shadow: 0 1px 4px rgba(0,0,0,0.25);
     padding: 12px;
   }
+
   .common-game-image {
     width: 96px;
     height: 96px;
@@ -629,6 +644,7 @@
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     margin-bottom: 0.5rem;
   }
+
   .common-game-name {
     font-size: 1rem;
     font-weight: 500;
@@ -639,6 +655,7 @@
     width: 100%;
     display: block;
   }
+
   .common-game-playtime {
     font-size: 0.95rem;
     color: #666;
@@ -647,6 +664,7 @@
     width: 100%;
     display: block;
   }
+
   @media (max-width: 1280px) {
     .common-games-list {
       grid-template-columns: repeat(2, 1fr);
@@ -656,6 +674,7 @@
       width: 300px;
     }
   }
+
   @media (max-width: 900px) {
     .common-games-list {
       grid-template-columns: 1fr;
@@ -665,6 +684,7 @@
       width: 100%;
     }
   }
+
 
   .profile-page {
     display: flex;
