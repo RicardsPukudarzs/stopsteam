@@ -154,6 +154,7 @@
     justify-content: space-between;
     align-items: center;
     flex: 1;
+    min-width: 0;
   }
 
   .track-name {
@@ -164,6 +165,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     margin-left: 12px;
+    min-width: 0;
   }
 
   .track-artist {
