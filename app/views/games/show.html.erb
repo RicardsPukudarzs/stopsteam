@@ -2,6 +2,7 @@
 <div class="game-music-container">
     <div class="game-music-stat-box">
         <div class="game-section">
+            <h1 class="game-section-header">Game Details</h1>
             <img src="<%= @header_img %>" alt="<%= @name %> Header Image" class="game-header-image">
             <div class="game-info-grid">
                 <div class="game-info-row">
@@ -32,11 +33,11 @@
                     <div class="game-info-label">Price:</div>
                     <div class="game-info-value game-price"><%= @price %></div>
                 </div>
-                </div>
             </div>
+        </div>
         <div class="music-section">
             <div class="music-artists">
-                <h1 class="music-section-header">Music Artists</h1>
+                <h1 class="music-section-header">Players Favourite Artists</h1>
                 <div class="artists-grid">
                     <% @top_artists.each_with_index do |artist, index| %>
                         <div class="artist-card">
@@ -47,7 +48,7 @@
                 </div>
             </div>
             <div class="music-tracks">
-                <h1 class="music-section-header">Music Tracks</h1>
+                <h1 class="music-section-header">Players Favourite Tracks</h1>
                 <div class="track-list">
                     <% @top_tracks.each_with_index do |track, index| %>
                         <div class="track-item">

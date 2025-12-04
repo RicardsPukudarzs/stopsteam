@@ -116,7 +116,8 @@
     width: 100%;
   }
 
-  .music-section-header {
+  .music-section-header,
+  .game-section-header {
     text-align: center;
     width: 100%;
     margin-bottom: 1rem;
