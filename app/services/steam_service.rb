@@ -43,10 +43,12 @@ class SteamService
     end
   end
 
-  def achievement_count(steam_id, app_id)
-    achievements = @steam_api.user_achievements(steam_id, app_id)
-    return 0 unless achievements && achievements['playerstats']['achievements']
-
-    achievements['playerstats']['achievements'].count { |a| a['achieved'] == 1 }
+  def fetch_game_stats(steam_id, app_id)
+    stats = @steam_api.user_stats_for_game(steam_id, app_id)['playerstats']['stats']
+    if stats.present?
+      stats.map { |stat| { name: stat['name'], value: stat['value'] } }
+    else
+      []
+    end
   end
 end

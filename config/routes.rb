@@ -31,6 +31,8 @@ Rails.application.routes.draw do
     delete :destroy_account
   end
 
+  get '/test', to: 'steam#test'
+
   match '*unmatched', to: 'application#route_not_found', via: :all
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)

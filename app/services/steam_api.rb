@@ -34,18 +34,16 @@ class SteamApi
     get('/IPlayerService/GetSteamLevel/v1/', steamid: steam_id)
   end
 
-  def user_achievements(steam_id, app_id)
-    get('/ISteamUserStats/GetPlayerAchievements/v0001/',
-        steamid: steam_id,
-        appid: app_id)
-  end
-
   def fetch_game_details(app_id)
     steam_api = SteamApi.new
     game_data = steam_api.game_info(app_id)
     return unless game_data.present? && game_data.values.first['success']
 
     game_data.values.first['data']
+  end
+
+  def user_stats_for_game(steam_id, app_id)
+    get('/ISteamUserStats/GetUserStatsForGame/v0002/', steamid: steam_id, appid: app_id)
   end
 
   private
