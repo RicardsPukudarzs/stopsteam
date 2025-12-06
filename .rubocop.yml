@@ -34,3 +34,6 @@ Rails/I18nLocaleTexts:
 
 Metrics/ClassLength:
   Max: 160
+
+Rails/ReversibleMigration:
+  Enabled: false
