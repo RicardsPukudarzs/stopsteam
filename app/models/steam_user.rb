@@ -1,6 +1,7 @@
 class SteamUser < ApplicationRecord
   belongs_to :user
   has_many :user_games, dependent: :destroy
+  has_many :game_stats, dependent: :destroy
 end
 
 # == Schema Information

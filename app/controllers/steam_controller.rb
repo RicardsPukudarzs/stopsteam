@@ -15,7 +15,7 @@ class SteamController < ApplicationController
   def test
     steam_api = SteamApi.new
     steam_id = '76561198211181033'
-    data = steam_api.user_stats_for_game(steam_id, 730)
+    data = steam_api.user_stats_for_game(steam_id, 2_767_030)
     render json: data
   end
 end

@@ -6,6 +6,7 @@ class SteamService
   def sync_data(user, steam_id)
     steam_user = sync_user(steam_id, user)
     sync_user_games(steam_id, steam_user)
+    FetchGameStatsJob.perform_later(steam_user.id)
     steam_user
   end
 

@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_27_142349) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_05_140412) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "game_stats", force: :cascade do |t|
+    t.bigint "steam_user_id", null: false
+    t.integer "app_id", null: false
+    t.string "stat_name"
+    t.bigint "stat_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["steam_user_id"], name: "index_game_stats_on_steam_user_id"
+  end
 
   create_table "spotify_users", force: :cascade do |t|
     t.string "display_name"
@@ -84,6 +94,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_27_142349) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "game_stats", "steam_users"
   add_foreign_key "spotify_users", "users"
   add_foreign_key "steam_users", "users"
   add_foreign_key "top_artists", "spotify_users"
