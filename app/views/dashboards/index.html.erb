@@ -24,6 +24,9 @@
             <div class="top-section-buttons">
                 <button id="top-artist-button" class="stats-switch-button">Top Artists</button>
                 <button id="top-song-button" class="stats-switch-button">Top Songs</button>
+                <button id="update-spotify-data-button" class="update-button">
+                    <%= link_to "Update spotify", "/auth/spotify" %>
+                </button>
             </div>
             <div class="top-artists-section">
                 <%= render 'top_artist_section' %>
@@ -42,6 +45,9 @@
             <div class="top-section-buttons">
                 <button id="user-info-button" class="stats-switch-button">User info</button>
                 <button id="games-info-button" class="stats-switch-button">Games info</button>
+                <button id="update-spotify-data-button" class="update-button">
+                    <%= link_to "Update steam", "/auth/steam" %>
+                </button>
             </div>
             <div class="user-info-section">
                 <%= render 'user_info_section' %>
