@@ -218,7 +218,7 @@
     justify-content: center;
   }
 
-  .spotify-warning-overlay {
+  .warning-overlay {
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.5);
@@ -229,7 +229,7 @@
     pointer-events: all;
   }
 
-  .spotify-data-warning {
+  .data-warning {
     background-color: var(--primary-background);
     color: var(--primary-text);
     padding: 2rem;
@@ -242,27 +242,27 @@
     z-index: 9999;
   }
 
-  .spotify-warning-buttons {
+  .warning-buttons {
     display: flex;
     justify-content: flex-end;
     gap: 1rem;
     margin-top: 1.5rem;
   }
 
-  .spotify-warning-button,
-  .spotify-warning-button-cancel {
+  .warning-button,
+  .warning-button-cancel {
     padding: 0.5rem 1rem;
     border-radius: 0.3rem;
     border: none;
     cursor: pointer;
   }
 
-  .spotify-warning-button {
+  .warning-button {
     background: #1db954;
     color: white;
   }
 
-  .spotify-warning-button-cancel {
+  .warning-button-cancel {
     background: #ccc;
     color: black;
   }

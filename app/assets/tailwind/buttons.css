@@ -36,7 +36,8 @@
         border-color: #3B82F6;
     }
 
-    .spotify-button {
+    .spotify-button,
+    .steam-button {
         background-color: var(--primary-foreground);
         border-radius: 0.375rem;
         color: var(--primary-text);
