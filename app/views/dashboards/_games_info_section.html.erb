@@ -1,4 +1,3 @@
-
 <div class="steam-games-info">
   <div class="steam-games-info-header">
     <h2>Games Information</h2>
@@ -8,7 +7,7 @@
 
   <div class="steam-games-stats">
     <% games.each_with_index do |game, index| %>
-      <div class="user-game-info">
+      <button id="show-game-stats-<%= index %>" class="user-game-info">
         <div class="game-index-icon">
           <h3 class="game-index"><%= index + 1 %>.</h3>
           <img src="<%= game.image_url %>" alt="Game Icon" class="game-icon">
@@ -20,7 +19,53 @@
           <p>Playtime: <%= game.playtime_hours %> hours</p>
           <p>Last Played: <%= game.last_played_date.present? ? game.last_played_date.strftime("%B %d, %Y") : "Never" %></p>
         </div>
+      </button>
+      <div id="game-stats-overlay-<%= index %>" class="game-stats-overlay">
+        <div class="game-stats-box">
+          <div class="close-button-container">
+            <button class="close-button" data-index="<%= index %>">&times;</button>
+          </div>
+          <h2><%= game.name %> - Detailed Stats</h2>
+          <div class="game-stats-grid">
+            <% if game.game_stats_hash.present? %>
+              <% game.game_stats_hash.each do |stat_name, stat_value| %>
+                <div class="game-stat-box">
+                  <div class="game-stat-name"><%= stat_name.to_s.tr('_', ' ').titleize %></div>
+                  <div class="game-stat-value"><%= stat_value %></div>
+                </div>
+              <% end %>
+            <% else %>
+              <div class="game-stats-empty">
+                NO STATS AVAILABLE FOR THIS GAME
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
     <% end %>
   </div>
 </div>
+
+<script>
+  document.addEventListener('turbo:load', function () {
+    document.querySelectorAll('[id^="show-game-stats-"]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        const index = button.id.replace('show-game-stats-', '');
+        const overlay = document.getElementById(`game-stats-overlay-${index}`);
+        if (overlay) {
+          overlay.style.display = 'flex';
+        }
+      });
+    });
+
+    document.querySelectorAll('.close-button').forEach(function (closeBtn) {
+      closeBtn.addEventListener('click', function () {
+        const index = closeBtn.getAttribute('data-index');
+        const overlay = document.getElementById(`game-stats-overlay-${index}`);
+        if (overlay) {
+          overlay.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

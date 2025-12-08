@@ -1,6 +1,8 @@
 class UserGame < ApplicationRecord
   belongs_to :steam_user
 
+  has_many :game_stats, primary_key: :app_id, foreign_key: :app_id
+
   def self.total_playtime_hours
     (sum(:playtime_forever).to_f / 60).floor
   end
@@ -17,6 +19,12 @@ class UserGame < ApplicationRecord
 
   def playtime_hours
     (playtime_forever.to_f / 60).floor(2)
+  end
+
+  def game_stats_hash
+    game_stats.where(steam_user_id: steam_user_id).each_with_object({}) do |stat, hash|
+      hash[stat.stat_name] = stat.stat_value
+    end
   end
 end
 

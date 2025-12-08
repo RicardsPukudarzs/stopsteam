@@ -133,12 +133,25 @@ html, body {
     align-items: center;
     justify-content: space-between;
     margin-top: 5px;
+    background: none;
+    border: none;
+    padding: 0;
+    width: 100%;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    outline: none;
+    box-shadow: none;
+  }
+
+  .user-game-info:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
   }
 
   .game-index-icon {
     display: flex;
     align-items: center;
-    gap: 5px; /* Space between index and icon */
+    gap: 10px;
   }
 
   .user-comparison-buttons {
@@ -150,15 +163,15 @@ html, body {
   }
 
   .game-icon {
-    height: 30px;
-    width: 30px;
+    height: 25px;
+    width: 25px;
     object-fit: cover;
     border-radius: 2px;
   }
 
   .game-name {
-    flex: 1; /* Take up remaining space */
-    margin-left: 15px; /* Add spacing between the name and the index/icon */
+    flex: 1;
+    margin-left: 15px;
     font-weight: bold;
   }
 

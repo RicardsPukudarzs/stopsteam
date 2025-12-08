@@ -740,4 +740,80 @@
     flex-shrink: 0;
     align-items: flex-start;
   }
+
+  .game-stats-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9998;
+    pointer-events: all;
+  }
+
+  .game-stats-box {
+    background-color: var(--primary-background);
+    color: var(--primary-text);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    min-width: 300px;
+    max-width: 600px;
+    max-height: 800px;
+    overflow-y: auto;
+    width: 90%;
+    text-align: left;
+    z-index: 9999;
+  }
+  .game-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 1.5rem;
+  }
+
+  .game-stat-box {
+    background: var(--primary-background, #fff);
+    color: var(--primary-text, #222);
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    padding: 1rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .game-stat-name {
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    word-break: break-word;
+  }
+
+  .game-stat-value {
+    font-size: 1.1rem;
+    text-align: center;
+    word-break: break-word;
+  }
+
+  .game-stats-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-weight: bold;
+    color: #888;
+    padding: 1.5rem 0;
+  }
+
+  .close-button-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .close-button {
+    cursor: pointer;
+    font-size: 1.5rem;
+  }
 }
