@@ -200,4 +200,27 @@ html, body {
     margin-bottom: 1rem;
     font-weight: 500;
   }
+
+  .flash-messages {
+    position: fixed;
+    top: 32px;
+    right: 32px;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .notice {
+    background: #22c55e; /* Tailwind green-500 */
+    color: #fff;
+    border-radius: 0.5rem;
+    padding: 1.2rem 2rem;
+    font-weight: bold;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    min-width: 180px;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+  }
 }

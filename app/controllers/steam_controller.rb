@@ -9,6 +9,7 @@ class SteamController < ApplicationController
     service = SteamService.new
     service.sync_data(current_user, steam_id)
 
+    flash[:notice] = 'Game stats will be available in a few minutes.'
     redirect_to dashboard_path
   end
 

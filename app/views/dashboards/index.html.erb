@@ -72,6 +72,11 @@
             </div>
         <% end %>
     </div>
+    <% if flash[:notice].present? %>
+      <div class="flash-messages">
+        <div class="notice"><%= flash[:notice] %></div>
+      </div>
+    <% end %>
 </div>
 <script type="text/javascript">
     document.addEventListener("turbo:load", () => {
@@ -153,5 +158,18 @@
             gamesInfoSection.style.display = "block";
             userInfoSection.style.display = "none";
         });
+    });
+
+    document.addEventListener("turbo:load", () => {
+        const flash = document.querySelector(".flash-messages");
+        if (flash) {
+            setTimeout(() => {
+            flash.style.transition = "opacity 0.5s";
+            flash.style.opacity = "0";
+            setTimeout(() => {
+                flash.style.display = "none";
+            }, 500);
+            }, 3500);
+        }
     });
 </script>
