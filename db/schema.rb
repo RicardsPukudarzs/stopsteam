@@ -27,6 +27,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_05_140412) do
   create_table "spotify_users", force: :cascade do |t|
     t.string "display_name"
     t.string "profile_image_url"
+    t.string "spotify_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

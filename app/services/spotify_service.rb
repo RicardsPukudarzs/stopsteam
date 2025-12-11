@@ -17,7 +17,8 @@ class SpotifyService
     @spotify_user_record.update(
       display_name: @spotify_user_data.display_name,
       profile_image_url: @spotify_user_data.images.first&.[]('url'),
-      user_id: @user.id
+      user_id: @user.id,
+      spotify_id: @spotify_user_data.id
     )
   end
 

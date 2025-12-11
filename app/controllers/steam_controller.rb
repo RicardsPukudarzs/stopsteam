@@ -6,6 +6,12 @@ class SteamController < ApplicationController
     auth = request.env['omniauth.auth']
     steam_id = auth.uid
 
+    if SteamUser.exists?(steam_id: steam_id)
+      flash[:alert] = 'This Steam account is already linked to another user.'
+      redirect_to dashboard_path
+      return
+    end
+
     service = SteamService.new
     service.sync_data(current_user, steam_id)
 
