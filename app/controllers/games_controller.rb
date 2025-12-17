@@ -10,7 +10,6 @@ class GamesController < ApplicationController
 
     game_details = SteamApi.new.fetch_game_details(app_id)
     details_service = GameDetailsService.new(game_details)
-    @game_details = game_details
     @name = details_service.name
     @short_desc = details_service.short_description
     @header_img = details_service.header_image

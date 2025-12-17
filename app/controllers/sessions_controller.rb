@@ -4,8 +4,14 @@ class SessionsController < ApplicationController
   def new; end
 
   def create
-    user = User.find_by(email: params[:user][:email])
-    if user&.authenticate(params[:user][:password])
+    email = params[:user][:email]
+    password = params[:user][:password]
+    if email.blank? || password.blank?
+      redirect_to login_path, alert: 'Email and password cannot be blank.'
+      return
+    end
+    user = User.find_by(email: email)
+    if user&.authenticate(password)
       session[:user_id] = user.id
       redirect_to dashboard_path, notice: 'Logged in successfully.'
     else
