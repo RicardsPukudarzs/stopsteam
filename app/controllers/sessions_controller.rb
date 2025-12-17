@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to dashboard_path, notice: 'Logged in successfully.'
     else
-      redirect_to login_path, alert: 'Wrong email or password'
+      redirect_to login_path, alert: 'Wrong email or password.'
     end
   end
 
