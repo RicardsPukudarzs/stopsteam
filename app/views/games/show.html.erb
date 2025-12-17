@@ -7,31 +7,31 @@
             <div class="game-info-grid">
                 <div class="game-info-row">
                     <div class="game-info-label">Name:</div>
-                    <div class="game-info-value game-title"><%= @name %></div>
+                    <div class="game-info-value"><%= @name.presence || "None" %></div>
                 </div>
                 <div class="game-info-row">
                     <div class="game-info-label">Release Date:</div>
-                    <div class="game-info-value"><%= @release_date %></div>
+                    <div class="game-info-value"><%= @release_date.presence || "None" %></div>
                 </div>
                 <div class="game-info-row">
                     <div class="game-info-label">Developer(s):</div>
-                    <div class="game-info-value"><%= @developers.join(', ') %></div>
+                    <div class="game-info-value"><%= @developers.present? ? @developers.join(', ') : "None" %></div>
                 </div>
                 <div class="game-info-row">
                     <div class="game-info-label">Publisher(s):</div>
-                    <div class="game-info-value"><%= @publishers.join(', ') %></div>
+                    <div class="game-info-value"><%= @publishers.present? ? @publishers.join(', ') : "None" %></div>
                 </div>
                 <div class="game-info-row">
                     <div class="game-info-label">Categories:</div>
-                    <div class="game-info-value"><%= @categories.join(', ') %></div>
+                    <div class="game-info-value"><%= @categories.present? ? @categories.join(', ') : "None" %></div>
                 </div>
                 <div class="game-info-row">
                     <div class="game-info-label">Description:</div>
-                    <div class="game-info-value game-description"><%= @short_desc.html_safe %></div>
+                    <div class="game-info-value game-description"><%= @short_desc.presence || "None" %></div>
                 </div>
                 <div class="game-info-row">
                     <div class="game-info-label">Price:</div>
-                    <div class="game-info-value game-price"><%= @price %></div>
+                    <div class="game-info-value game-price"><%= @price.presence || "None" %></div>
                 </div>
             </div>
         </div>
