@@ -1,6 +1,6 @@
 <div class="steam-user-info">
     <div class="steam-user-info-header">
-        <img src="<%= current_user.steam_user.profile_image_url %>" alt="Steam Avatar" class="steam-avatar">
+        <img src="<%= @steam_user_profile_image_url %>" alt="Steam Avatar" class="steam-avatar">
 
         <div class="steam-info-columns">
             <div class="steam-info-labels">
@@ -12,27 +12,27 @@
             </div>
 
             <div class="steam-info-values">
-                <p><%= current_user.steam_user.name %></p>
-                <p><%= current_user.steam_user.user_level %></p>
-                <p><%= Time.at(current_user.steam_user.last_log_off).strftime("%B %d, %Y") %></p>
-                <p><%= current_user.steam_user.loc_country_code %></p>
-                <p><%= Time.at(current_user.steam_user.time_created).strftime("%B %d, %Y") %></p>
+                <p><%= @steam_user_name %></p>
+                <p><%= @steam_user_level %></p>
+                <p><%= Time.at(@steam_user_last_log_off).strftime("%B %d, %Y") %></p>
+                <p><%= @steam_user_country %></p>
+                <p><%= Time.at(@steam_user_time_created).strftime("%B %d, %Y") %></p>
             </div>
         </div>
-        </div>
+    </div>
 
     <hr class="steam-divider">
 
     <div class="steam-user-stats">
-        <div class= "steam-stats-columns">
+        <div class="steam-stats-columns">
             <div class="steam-stats-labels">
                 <p>Games Owned:</p>
                 <p>Total Playtime Hours:</p>
             </div>
 
             <div class="steam-stats-values">
-                <p><%= current_user.steam_user.user_games.count %></p>
-                <p><%= current_user.steam_user.user_games.total_playtime_hours %></p>
+                <p><%= @games_owned %></p>
+                <p><%= @total_playtime_hours %></p>
             </div>
         </div>
     </div>
