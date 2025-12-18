@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
   get '/game/:app_id', to: 'games#show', as: :game
 
-  resource :user, only: %i[show update] do
+  resource :profile, controller: 'users', only: %i[show update] do
     delete :disconnect_steam
     delete :disconnect_spotify
     delete :destroy_account

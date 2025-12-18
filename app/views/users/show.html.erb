@@ -5,19 +5,19 @@
             <h1 class="profile-title"><%= current_user.username %>'s Profile</h1>
             <div class="profile-buttons">
                 <% if current_user.steam_user.present? %>
-                    <%= button_to "Disconnect Steam", disconnect_steam_user_path, method: :delete, class: "delete-button", data: { turbo: false } %>
+                    <%= button_to "Disconnect Steam", disconnect_steam_profile_path, method: :delete, class: "delete-button", data: { turbo: false } %>
                 <% end %>
                 <% if current_user.spotify_user.present? %>
-                    <%= button_to "Disconnect Spotify", disconnect_spotify_user_path, method: :delete, class: "delete-button", data: { turbo: false } %>
+                    <%= button_to "Disconnect Spotify", disconnect_spotify_profile_path, method: :delete, class: "delete-button", data: { turbo: false } %>
                 <% end %>
-                <%= button_to "Delete Account", destroy_account_user_path, method: :delete, class: "delete-button", data: { turbo: false, confirm: "Are you sure you want to delete your account? This cannot be undone." } %>
+                <%= button_to "Delete Account", destroy_account_profile_path, method: :delete, class: "delete-button", data: { turbo: false, confirm: "Are you sure you want to delete your account? This cannot be undone." } %>
             </div>
         </div>
 
         <hr class="mb-2">
         
         <div class="profile-content">
-            <%= form_with model: current_user, url: user_path, method: :patch, local: true do |form| %>
+            <%= form_with model: current_user, url: profile_path, method: :patch, local: true do |form| %>
                 <div>
                     <%= form.label :username %>
                     <%= form.text_field :username, class: "input-box" %>

@@ -77,12 +77,12 @@ class UsersController < ApplicationController
 
   def disconnect_steam
     current_user.steam_user&.destroy
-    redirect_to user_path, notice: 'Steam disconnected.'
+    redirect_to profile_path, notice: 'Steam disconnected.'
   end
 
   def disconnect_spotify
     current_user.spotify_user&.destroy
-    redirect_to user_path, notice: 'Spotify disconnected.'
+    redirect_to profile_path, notice: 'Spotify disconnected.'
   end
 
   def destroy_account
