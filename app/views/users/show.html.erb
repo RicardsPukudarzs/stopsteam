@@ -38,8 +38,13 @@
                     <%= form.submit "Edit Profile", class: "btn-primary" %>
                 </div>
             <% end %>
-            <% if flash[:alert] %>
-                <div class="alert"><%= flash[:alert] %></div>
+            <% flash.each do |key, value| %>
+                <% flash_class = case key
+                    when "notice" then "flash-notice"
+                    when "alert", "error" then "flash-alert"
+                    else "flash-notice"
+                    end %>
+                <div class="<%= flash_class %>"><%= value %></div>
             <% end %>
         </div>
     </div>

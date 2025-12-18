@@ -13,6 +13,11 @@ class UsersController < ApplicationController
       return
     end
 
+    if user_params[:username].length <= 3
+      redirect_to register_path, alert: 'Username must be longer than 3 characters.'
+      return
+    end
+
     if User.exists?(email: user_params[:email])
       redirect_to register_path, alert: 'Email is already taken.'
       return
@@ -37,11 +42,36 @@ class UsersController < ApplicationController
   end
 
   def update
+    required_fields = %i[username email password password_confirmation]
+    if required_fields.any? { |field| user_params[field].blank? }
+      redirect_to register_path, alert: 'All fields must be filled.'
+      return
+    end
+
+    if user_params[:username].length <= 3
+      redirect_to profile_path, alert: 'Username must be longer than 3 characters.'
+      return
+    end
+
+    if User.where(email: user_params[:email]).where.not(id: current_user.id).exists?
+      redirect_to profile_path, alert: 'Email is already taken.'
+      return
+    end
+
+    if user_params[:password].length < 6
+      redirect_to profile_path, alert: 'Password must be at least 6 characters long.'
+      return
+    end
+
+    if user_params[:password] != user_params[:password_confirmation]
+      redirect_to profile_path, alert: 'Password and password confirmation must match.'
+      return
+    end
+
     if current_user.update(user_params)
-      redirect_to user_path, notice: 'Profile updated successfully.'
+      redirect_to profile_path, notice: 'Profile edited successfully.'
     else
-      flash.now[:alert] = 'Update failed. Please check the errors below.'
-      render :show
+      redirect_to profile_path, alert: 'Failed to edit profile, something went wrong.'
     end
   end
 
