@@ -1,6 +1,6 @@
 <div class="steam-user-info">
     <div class="steam-user-info-header">
-        <img src="<%= @steam_user_profile_image_url %>" alt="Steam Avatar" class="steam-avatar">
+        <img src="<%= @steam_user_profile_image_url.presence || 'Private' %>" alt="Steam Avatar" class="steam-avatar">
 
         <div class="steam-info-columns">
             <div class="steam-info-labels">
@@ -12,11 +12,23 @@
             </div>
 
             <div class="steam-info-values">
-                <p><%= @steam_user_name %></p>
-                <p><%= @steam_user_level %></p>
-                <p><%= Time.at(@steam_user_last_log_off).strftime("%B %d, %Y") %></p>
-                <p><%= @steam_user_country %></p>
-                <p><%= Time.at(@steam_user_time_created).strftime("%B %d, %Y") %></p>
+                <p><%= @steam_user_name.presence || "Private" %></p>
+                <p><%= @steam_user_level.presence || "Private" %></p>
+                <p>
+                  <% if @steam_user_last_log_off.present? %>
+                    <%= Time.at(@steam_user_last_log_off).strftime("%B %d, %Y") %>
+                  <% else %>
+                    Private
+                  <% end %>
+                </p>
+                <p><%= @steam_user_country.presence || "Private" %></p>
+                <p>
+                  <% if @steam_user_time_created.present? %>
+                    <%= Time.at(@steam_user_time_created).strftime("%B %d, %Y") %>
+                  <% else %>
+                    Private
+                  <% end %>
+                </p>
             </div>
         </div>
     </div>
@@ -31,8 +43,8 @@
             </div>
 
             <div class="steam-stats-values">
-                <p><%= @games_owned %></p>
-                <p><%= @total_playtime_hours %></p>
+                <p><%= @games_owned.presence || "Private" %></p>
+                <p><%= @total_playtime_hours.presence || "Private" %></p>
             </div>
         </div>
     </div>

@@ -15,7 +15,7 @@ class GameMusicService
       user = User.find_by(id: user_id)
       next unless user&.spotify_user
 
-      user_top_artists = user.spotify_user.top_artists.limit(9)
+      user_top_artists = user.spotify_user.top_artists.where(period: 'all_time').order(:rank).limit(10)
       user_top_artists.each do |artist|
         weighted_artists[artist.name][:weight] += weight
         weighted_artists[artist.name][:image_url] ||= artist.image_url
@@ -39,7 +39,7 @@ class GameMusicService
       user = User.find_by(id: user_id)
       next unless user&.spotify_user
 
-      user_top_tracks = user.spotify_user.top_songs.limit(10)
+      user_top_tracks = user.spotify_user.top_songs.where(period: 'all_time').order(:rank).limit(10)
       user_top_tracks.each do |track|
         weighted_tracks[track.name][:weight] += weight
         weighted_tracks[track.name][:image_url] ||= track.image_url
