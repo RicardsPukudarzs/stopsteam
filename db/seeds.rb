@@ -32,10 +32,10 @@ steam_users = [
 ].map { |attrs| SteamUser.create!(attrs) }
 
 spotify_users = [
-  { display_name: 'AliceSpotify', profile_image_url: '', user: users[0] },
-  { display_name: 'BobSpotify', profile_image_url: '', user: users[1] },
-  { display_name: 'CarolSpotify', profile_image_url: '', user: users[2] },
-  { display_name: 'DaveSpotify', profile_image_url: '', user: users[3] }
+  { spotify_id: '1', display_name: 'AliceSpotify', profile_image_url: '', user: users[0] },
+  { spotify_id: '2', display_name: 'BobSpotify', profile_image_url: '', user: users[1] },
+  { spotify_id: '3', display_name: 'CarolSpotify', profile_image_url: '', user: users[2] },
+  { spotify_id: '4', display_name: 'DaveSpotify', profile_image_url: '', user: users[3] }
 ].map { |attrs| SpotifyUser.create!(attrs) }
 
 # Create games for each user
@@ -144,6 +144,7 @@ reverse_steam = SteamUser.create!(
 
 # Spotify connection
 reverse_spotify = SpotifyUser.create!(
+  spotify_id: '5',
   display_name: 'EveSpotify',
   profile_image_url: '',
   user: reverse_user
