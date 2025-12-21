@@ -99,21 +99,21 @@ class UserComparisonService
   def calculate_music_compatibility_score(user1, user2)
     artists1 = get_top_artists(user1, 10)
     artists2 = get_top_artists(user2, 10)
-    names1 = artists1.map(&:name)
-    names2 = artists2.map(&:name)
+    artists1_hash = artists1.index_by(&:name)
+    artists2_hash = artists2.index_by(&:name)
 
     tracks1 = get_top_tracks(user1, 10)
     tracks2 = get_top_tracks(user2, 10)
-    track_names1 = tracks1.map(&:name)
-    track_names2 = tracks2.map(&:name)
+    tracks1_hash = tracks1.index_by(&:name)
+    tracks2_hash = tracks2.index_by(&:name)
 
-    common_artists = names1 & names2
+    common_artists = artists1_hash.keys & artists2_hash.keys
     artist_overlap_score = common_artists.size / 10.0
 
     artist_rank_score = if common_artists.any?
                           sum = common_artists.sum do |name|
-                            r1 = names1.index(name)
-                            r2 = names2.index(name)
+                            r1 = artists1_hash[name].rank
+                            r2 = artists2_hash[name].rank
                             1.0 - ((r1 - r2).abs / 10.0)
                           end
                           sum / common_artists.size
@@ -121,13 +121,13 @@ class UserComparisonService
                           0.0
                         end
 
-    common_tracks = track_names1 & track_names2
+    common_tracks = tracks1_hash.keys & tracks2_hash.keys
     track_overlap_score = common_tracks.size / 10.0
 
     track_rank_score = if common_tracks.any?
                          sum = common_tracks.sum do |name|
-                           r1 = track_names1.index(name)
-                           r2 = track_names2.index(name)
+                           r1 = tracks1_hash[name].rank
+                           r2 = tracks2_hash[name].rank
                            1.0 - ((r1 - r2).abs / 10.0)
                          end
                          sum / common_tracks.size
@@ -149,13 +149,14 @@ class UserComparisonService
     names1 = top_games1.map(&:name)
     names2 = top_games2.map(&:name)
 
-    common_names10 = (names1 & names2)
+    top_games1_hash = top_games1.index_by(&:name)
+    top_games2_hash = top_games2.index_by(&:name)
+    common_names10 = top_games1_hash.keys & top_games2_hash.keys
+
     playtime_score = if common_names10.any?
                        sum = common_names10.sum do |name|
-                         r1 = names1.index(name)
-                         r2 = names2.index(name)
-                         g1 = top_games1[r1]
-                         g2 = top_games2[r2]
+                         g1 = top_games1_hash[name]
+                         g2 = top_games2_hash[name]
                          playtime1 = g1.playtime_hours
                          playtime2 = g2.playtime_hours
                          similarity = 1.0 - ((playtime1 - playtime2).abs / [playtime1, playtime2].max.to_f)
