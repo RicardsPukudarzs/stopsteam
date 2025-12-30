@@ -32,12 +32,12 @@ class UserComparisonService
   end
 
   def get_top_artists(user, limit = 10)
-    user.spotify_user.top_artists.where(period: 'all_time').order(:rank).limit(limit)
+    user.spotify_user.top_artists.where(period: 'last_year').order(:rank).limit(limit)
   end
 
   def get_common_artists(user1, user2)
-    artists1 = user1.spotify_user.top_artists.where(period: 'all_time').order(:rank)
-    artists2 = user2.spotify_user.top_artists.where(period: 'all_time').order(:rank)
+    artists1 = user1.spotify_user.top_artists.where(period: 'last_year').order(:rank)
+    artists2 = user2.spotify_user.top_artists.where(period: 'last_year').order(:rank)
 
     artists1_hash = artists1.index_by(&:name)
     artists2_hash = artists2.index_by(&:name)
@@ -64,12 +64,12 @@ class UserComparisonService
   end
 
   def get_top_tracks(user, limit = 10)
-    user.spotify_user.top_songs.where(period: 'all_time').order(:rank).limit(limit)
+    user.spotify_user.top_songs.where(period: 'last_year').order(:rank).limit(limit)
   end
 
   def get_common_tracks(user1, user2)
-    tracks1 = user1.spotify_user.top_songs.where(period: 'all_time').order(:rank)
-    tracks2 = user2.spotify_user.top_songs.where(period: 'all_time').order(:rank)
+    tracks1 = user1.spotify_user.top_songs.where(period: 'last_year').order(:rank)
+    tracks2 = user2.spotify_user.top_songs.where(period: 'last_year').order(:rank)
 
     tracks1_hash = tracks1.index_by(&:name)
     tracks2_hash = tracks2.index_by(&:name)

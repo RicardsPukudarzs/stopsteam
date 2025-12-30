@@ -24,7 +24,7 @@ class SpotifyService
 
   def sync_top_artists
     {
-      'long_term' => 'all_time',
+      'long_term' => 'last_year',
       'medium_term' => '6_months',
       'short_term' => '4_weeks'
     }.each do |api_range, period_name|
@@ -46,7 +46,7 @@ class SpotifyService
 
   def sync_top_songs
     {
-      'long_term' => 'all_time',
+      'long_term' => 'last_year',
       'medium_term' => '6_months',
       'short_term' => '4_weeks'
     }.each do |api_range, period_name|

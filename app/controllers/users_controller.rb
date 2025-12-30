@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   def update
     required_fields = %i[username email password password_confirmation]
     if required_fields.any? { |field| user_params[field].blank? }
-      redirect_to register_path, alert: 'All fields must be filled.'
+      redirect_to profile_path, alert: 'All fields must be filled.'
       return
     end
 

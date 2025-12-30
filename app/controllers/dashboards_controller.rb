@@ -4,10 +4,10 @@ class DashboardsController < ApplicationController
   def index
     @spotify_user = current_user.spotify_user
     if @spotify_user
-      @top_artists_all_time = @spotify_user.top_artists_by_period('all_time')
+      @top_artists_last_year = @spotify_user.top_artists_by_period('last_year')
       @top_artists_last_6_months = @spotify_user.top_artists_by_period('6_months')
       @top_artists_last_4_weeks = @spotify_user.top_artists_by_period('4_weeks')
-      @top_songs_all_time = @spotify_user.top_songs_by_period('all_time')
+      @top_songs_last_year = @spotify_user.top_songs_by_period('last_year')
       @top_songs_last_6_months = @spotify_user.top_songs_by_period('6_months')
       @top_songs_last_4_weeks = @spotify_user.top_songs_by_period('4_weeks')
     end

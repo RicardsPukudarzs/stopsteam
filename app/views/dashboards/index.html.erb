@@ -138,13 +138,13 @@
         artistButton.addEventListener("click", () => {
             artistSection.style.display = "block";
             songSection.style.display = "none";
-            selectDefaultTab(artistSection, "artist_all_time");
+            selectDefaultTab(artistSection, "artist_last_year");
         });
 
         songButton.addEventListener("click", () => {
             songSection.style.display = "block";
             artistSection.style.display = "none";
-            selectDefaultTab(songSection, "song_all_time");
+            selectDefaultTab(songSection, "song_last_year");
         });
     });
 

@@ -1,12 +1,12 @@
 <div class="spotify-time-range-buttons">
-    <button data-target="artist_all_time" class="time-range-button border-blue-500">All Time</button>
+    <button data-target="artist_last_year" class="time-range-button border-blue-500">Last Year</button>
     <button data-target="artist_6_months" class="time-range-button">Last 6 Months</button>
     <button data-target="artist_4_weeks" class="time-range-button">Last 4 Weeks</button>
 </div>
 
 <div id="top-artists">
-    <div id="artist_all_time" class="tab-content">
-        <%= render 'top_artists', artists: @top_artists_all_time %>
+    <div id="artist_last_year" class="tab-content">
+        <%= render 'top_artists', artists: @top_artists_last_year %>
     </div>
 
     <div id="artist_6_months" class="tab-content" style="display:none;">
