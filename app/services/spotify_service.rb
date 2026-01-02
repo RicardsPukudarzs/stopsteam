@@ -1,10 +1,12 @@
 class SpotifyService
+  # Inicializē servisu ar Spotify autorizācijas datiem un sistēmas lietotāju
   def initialize(spotify_auth, user)
     @spotify_user_data = RSpotify::User.new(spotify_auth)
     @user = user
     @spotify_user_record = @user.spotify_user || @user.build_spotify_user
   end
 
+  # Izsauc visus lietotāju Spotify datu sinhronizāciju
   def sync_user
     update_user_record
     sync_top_artists
@@ -13,6 +15,7 @@ class SpotifyService
 
   private
 
+  # Atjaunina Spotify lietotāja pamatinformāciju lokālajā datubāzē
   def update_user_record
     @spotify_user_record.update(
       display_name: @spotify_user_data.display_name,
@@ -22,6 +25,7 @@ class SpotifyService
     )
   end
 
+  # Sinhronizē lietotāja visklausītākos Spotify izpildītājus
   def sync_top_artists
     {
       'long_term' => 'last_year',
@@ -44,6 +48,7 @@ class SpotifyService
     end
   end
 
+  # Sinhronizē lietotāja visklausītākās Spotify dziesmas
   def sync_top_songs
     {
       'long_term' => 'last_year',

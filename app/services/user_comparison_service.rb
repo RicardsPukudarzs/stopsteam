@@ -1,12 +1,15 @@
 class UserComparisonService
+  # Atgriež lietotāja populārākās spēles pēc kopējā spēlēšanas laika
   def get_top_games(user, limit = 10)
     user.steam_user.user_games.order(playtime_forever: :desc).limit(limit)
   end
 
+  # Atrod kopīgās spēles diviem lietotājiem un aprēķina līdzības rādītājus
   def get_common_games(user1, user2)
     games1 = user1.steam_user.user_games
     games2 = user2.steam_user.user_games
 
+    # Atrod kopīgos spēļu identifikatorus
     common_app_ids = games1.pluck(:app_id) & games2.pluck(:app_id)
 
     common_games = common_app_ids.map do |app_id|
@@ -16,6 +19,7 @@ class UserComparisonService
       playtime2 = game2.playtime_hours
       total_playtime = playtime1 + playtime2
 
+      # Līdzības rādītājs – jo mazāka atšķirība, jo lielāka līdzība
       similarity = total_playtime - (playtime1 - playtime2).abs
 
       {
@@ -28,13 +32,16 @@ class UserComparisonService
       }
     end
 
+    # Sakārto spēles pēc līdzības un kopējā spēlēšanas laika
     common_games.sort_by { |g| [-g[:similarity], -g[:total_playtime]] }
   end
 
+  # Atgriež lietotāja populārākos izpildītājus pēdējā gada periodā
   def get_top_artists(user, limit = 10)
     user.spotify_user.top_artists.where(period: 'last_year').order(:rank).limit(limit)
   end
 
+  # Atrod kopīgos izpildītājus diviem lietotājiem
   def get_common_artists(user1, user2)
     artists1 = user1.spotify_user.top_artists.where(period: 'last_year').order(:rank)
     artists2 = user2.spotify_user.top_artists.where(period: 'last_year').order(:rank)
@@ -49,6 +56,7 @@ class UserComparisonService
       a2 = artists2_hash[name]
       rank1 = a1.rank
       rank2 = a2.rank
+      # Jo mazāks score, jo lielāka līdzība
       score = rank1 + rank2 + (rank1 - rank2).abs
 
       {
@@ -63,10 +71,12 @@ class UserComparisonService
     common_artists.sort_by { |a| a[:score] }
   end
 
+  # Atgriež lietotāja populārākās dziesmas
   def get_top_tracks(user, limit = 10)
     user.spotify_user.top_songs.where(period: 'last_year').order(:rank).limit(limit)
   end
 
+  # Atrod kopīgās dziesmas diviem lietotājiem
   def get_common_tracks(user1, user2)
     tracks1 = user1.spotify_user.top_songs.where(period: 'last_year').order(:rank)
     tracks2 = user2.spotify_user.top_songs.where(period: 'last_year').order(:rank)
@@ -96,6 +106,7 @@ class UserComparisonService
     common_tracks.sort_by { |t| t[:score] }
   end
 
+  # Aprēķina kopējo mūzikas saderības koeficientu starp diviem lietotājiem
   def calculate_music_compatibility_score(user1, user2)
     artists1 = get_top_artists(user1, 10)
     artists2 = get_top_artists(user2, 10)
@@ -107,9 +118,11 @@ class UserComparisonService
     tracks1_hash = tracks1.index_by(&:name)
     tracks2_hash = tracks2.index_by(&:name)
 
+    # Izpildītāju pārklāšanās koeficients
     common_artists = artists1_hash.keys & artists2_hash.keys
     artist_overlap_score = common_artists.size / 10.0
 
+    # Izpildītāju rangu līdzība
     artist_rank_score = if common_artists.any?
                           sum = common_artists.sum do |name|
                             r1 = artists1_hash[name].rank
@@ -121,9 +134,11 @@ class UserComparisonService
                           0.0
                         end
 
+    # Dziesmu pārklāšanās koeficients
     common_tracks = tracks1_hash.keys & tracks2_hash.keys
     track_overlap_score = common_tracks.size / 10.0
 
+    # Dziesmu rangu līdzība
     track_rank_score = if common_tracks.any?
                          sum = common_tracks.sum do |name|
                            r1 = tracks1_hash[name].rank
@@ -135,6 +150,7 @@ class UserComparisonService
                          0.0
                        end
 
+    # Gala mūzikas saderības koeficients
     artist_score = (artist_overlap_score * 0.8) + (artist_rank_score * 0.2)
     track_score = (track_overlap_score * 0.8) + (track_rank_score * 0.2)
 
@@ -142,6 +158,7 @@ class UserComparisonService
     total_score.round(3)
   end
 
+  # Aprēķina spēļu saderības koeficientu starp diviem lietotājiem
   def calculate_game_compatibility_score(user1, user2)
     top_games1 = get_top_games(user1, 20)
     top_games2 = get_top_games(user2, 20)
@@ -153,6 +170,7 @@ class UserComparisonService
     top_games2_hash = top_games2.index_by(&:name)
     common_names10 = top_games1_hash.keys & top_games2_hash.keys
 
+    # Spēlēšanas laika līdzības koeficients
     playtime_score = if common_names10.any?
                        sum = common_names10.sum do |name|
                          g1 = top_games1_hash[name]
@@ -167,6 +185,7 @@ class UserComparisonService
                        0.0
                      end
 
+    # Kopīgo spēļu skaita koeficients
     common_names20 = names1 & names2
     common_games_score = common_names20.size / 20.0
 

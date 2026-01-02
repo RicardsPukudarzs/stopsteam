@@ -1,8 +1,10 @@
 class SteamService
+  # Inicializē servisu ar SteamApi instanci
   def initialize(steam_api = SteamApi.new)
     @steam_api = steam_api
   end
 
+  # Izscauc visas Steam lietotāju datu sinhronizācijas
   def sync_data(user, steam_id)
     steam_user = sync_user(steam_id, user)
     sync_user_games(steam_id, steam_user)
@@ -10,6 +12,7 @@ class SteamService
     steam_user
   end
 
+  # Sinhronizē Steam lietotāja profila datus
   def sync_user(steam_id, user)
     player_info = @steam_api.player_summary(steam_id)['response']['players'].first
     user_level = @steam_api.user_level(steam_id)['response']['player_level']
@@ -30,6 +33,7 @@ class SteamService
     steam_user
   end
 
+  # Sinhronizē lietotājam piederošās Steam spēles
   def sync_user_games(steam_id, steam_user)
     games = @steam_api.owned_games(steam_id)['response']['games'] || []
 
@@ -44,6 +48,7 @@ class SteamService
     end
   end
 
+  # Iegūst lietotāja statistiku konkrētai spēlei
   def fetch_game_stats(steam_id, app_id)
     stats = @steam_api.user_stats_for_game(steam_id, app_id)['playerstats']['stats']
     if stats.present?
